@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { LinkRef } from '../../../../types/Types'
-import './HamburgerMenu.css'
+import './HamburgerMenu.scss'
 
 const HamburgerMenu: FunctionComponent<{ links: LinkRef[] }> = ({ links }) => {
   return (

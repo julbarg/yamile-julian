@@ -2,7 +2,7 @@ import useIsMobile from '../../../hooks/useIsMobile'
 import { LinkRef } from '../../../types/Types'
 import HamburgerMenu from '../navigation/HamburgerMenu/HamburgerMenu'
 import LineMenu from '../navigation/LineMenu/LineMenu'
-import './Header.css'
+import './Header.scss'
 
 const Header = () => {
   const [isMobile] = useIsMobile()
