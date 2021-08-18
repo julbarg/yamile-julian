@@ -1,11 +1,23 @@
-import { render } from "react-dom";
+import { FunctionComponent, StrictMode } from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import HomePage from './views/HomePage/HomePage'
 
-const App = () => {
+const App: FunctionComponent = () => {
   return (
-    <div>
-      <h1>Yamile & Julian</h1>
+    <div className="app">
+      <Router>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Router>
     </div>
-  );
-};
+  )
+}
 
-render(<App />, document.getElementById("root"));
+render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+  document.getElementById('root')
+)

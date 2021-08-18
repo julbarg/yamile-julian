@@ -1,3 +1,34 @@
-h1 {
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #d5cbbf;
+  background-image: url(./assets/images/tapiz.jpeg);
+  margin: 0;
+  padding: 0;
+  font-family: 'Oswald', sans-serif;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+li {
+  list-style-type: none;
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
 }

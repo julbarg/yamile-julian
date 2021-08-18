@@ -1,0 +1,95 @@
+header {
+  color: #3f4551;
+  display: flex;
+  flex-direction: column;
+  background-image: url(../../../assets/images/header03_1280.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: center;
+  height: 100vh;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+h1.title {
+  font-family: 'Style Script', cursive;
+  font-size: 3.2rem;
+  padding: 0 3rem;
+  line-height: 50px;
+  text-align: center;
+  flex: 1;
+  margin-top: 3rem;
+}
+
+header div.hero {
+  padding-top: 7rem;
+}
+
+div.hero p {
+  font-size: 3rem;
+  text-align: center;
+  font-family: 'Bebas Neue', cursive;
+  margin-bottom: 0;
+}
+
+div.hero p.town {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+div.hero button {
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #3f4551;
+}
+
+div.hero button:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+div.hero button:active {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+div.hero .container-button {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+@media only screen and (orientation: landscape) and (max-width: 769px) {
+  header div.hero {
+    padding-top: 0rem;
+  }
+
+  h1.title {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  header {
+    height: 80vh;
+    background-position-y: bottom;
+  }
+  header div.line-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 2rem;
+  }
+
+  header div.line-menu > nav,
+  header div.line-menu > h1 {
+    flex: 1;
+  }
+
+  h1.title {
+    font-size: 4rem;
+    line-height: 70px;
+    margin-top: 0.67em;
+    padding: 0 3rem;
+  }
+}
