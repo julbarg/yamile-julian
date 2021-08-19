@@ -10,3 +10,11 @@ export interface FAQResponse {
   image?: string
   id: string
 }
+
+export interface Activity {
+  id: string
+  activity: string
+  description: string
+  icon: string
+  hour: string
+}

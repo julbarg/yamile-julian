@@ -1,6 +1,7 @@
 import React from 'react'
 import Faq from '../../components/faq/Faq'
 import Header from '../../components/layout/header/Header'
+import Schedule from '../../components/schedule/Schedule'
 import { FAQResponse } from '../../types/Types'
 import './HomePage.css'
 
@@ -25,6 +26,7 @@ const HomePage = () => {
     <div className="home-page">
       <Header />
       <Faq faqs={faqs} />
+      <Schedule />
     </div>
   )
 }

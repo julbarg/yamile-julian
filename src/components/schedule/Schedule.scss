@@ -1,0 +1,83 @@
+.schedule {
+  background-color: #3f4551;
+  background-image: url(../../assets/images/schedule-bg02.png);
+  background-size: cover;
+  background-position-x: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  padding: 1rem;
+  color: rgba($color: #fff, $alpha: 0.8);
+
+  img {
+    width: 96px;
+  }
+
+  h2 {
+    font-family: 'Style Script', cursive;
+    font-size: 3.2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    line-height: 1;
+  }
+
+  p {
+    text-align: center;
+    margin: 0;
+  }
+
+  p.location {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  div.activities {
+    div.activity {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 4px solid rgba($color: #fff, $alpha: 0.8);
+      padding: 1.5rem 0;
+
+      div.activity-content {
+        text-align: center;
+        padding: 1.5rem 0;
+
+        .activity-hour-name {
+          display: flex;
+          font-family: 'Bebas Neue', cursive;
+          font-size: 2rem;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 769px) {
+    padding: 2rem;
+    background-size: cover;
+
+    h2 {
+      font-size: 4rem;
+    }
+
+    div.activities {
+      width: 60%;
+      margin: 0 auto;
+
+      div.activity {
+        flex-direction: row;
+
+        div.activity-content {
+          text-align: left;
+          padding-left: 2rem;
+
+          div.activity-hour-name {
+            justify-content: start;
+          }
+        }
+      }
+    }
+  }
+}

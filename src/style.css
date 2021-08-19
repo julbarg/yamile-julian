@@ -14,6 +14,20 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
+h2,
+h3 {
+  font-family: 'Bebas Neue', cursive;
+}
+h2 {
+  text-align: center;
+  font-size: 3rem;
+  margin: 1rem 0;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
 .app {
   display: flex;
   justify-content: center;

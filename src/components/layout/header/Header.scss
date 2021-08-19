@@ -79,9 +79,11 @@ header {
       padding: 0 2rem;
     }
 
-    > nav,
-    > h1 {
-      flex: 1;
+    .line-menu {
+      nav,
+      h1 {
+        flex: 1;
+      }
     }
 
     h1.title {

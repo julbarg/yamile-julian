@@ -4,13 +4,7 @@
 
   h2,
   h3 {
-    font-family: 'Bebas Neue', cursive;
     color: #3f4551;
-  }
-  h2 {
-    text-align: center;
-    font-size: 3rem;
-    margin: 1rem 0;
   }
 
   h3 {
@@ -34,6 +28,7 @@
   }
 
   @media (min-width: 769px) {
+    padding: 2rem;
     h3 {
       font-size: 1.5rem;
     }
