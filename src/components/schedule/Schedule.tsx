@@ -39,7 +39,7 @@ const Schedule = () => {
   ]
 
   return (
-    <div className="schedule">
+    <div className="schedule" id="shcedule">
       <h2>Yamile & Julian</h2>
       <p className="location">Diciembre 19, 2020</p>
       <p>Hacienda La Vicotoria. Subachoque, Cundinamarca</p>

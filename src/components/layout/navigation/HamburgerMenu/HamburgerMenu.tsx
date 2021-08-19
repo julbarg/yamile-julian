@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
+import { NavHashLink as Link } from 'react-router-hash-link'
 import { LinkRef } from '../../../../types/Types'
 import './HamburgerMenu.scss'
 
@@ -17,7 +17,14 @@ const HamburgerMenu: FunctionComponent<{ links: LinkRef[] }> = ({ links }) => {
         <ul id="menu">
           {links.map((link) => (
             <li key={link.id}>
-              <Link to={link.route}>{link.name}</Link>
+              <Link
+                to={link.route}
+                activeClassName="active"
+                smooth={true}
+                exact
+              >
+                {link.name}
+              </Link>
             </li>
           ))}
         </ul>

@@ -8,10 +8,10 @@ const Header = () => {
   const [isMobile] = useIsMobile()
 
   const links: LinkRef[] = [
-    { id: 'confirm', route: '/', name: 'Confirmar Asistencia' },
-    { id: 'faq', route: '/', name: 'Preguntas Frecuentes' },
-    { id: 'shcedule', route: '/', name: 'Cronograma' },
-    { id: 'story', route: '/', name: 'Historia' },
+    { id: 'confirm', route: '/#confirm', name: 'Confirmar Asistencia' },
+    { id: 'faq', route: '/#faq', name: 'Preguntas Frecuentes' },
+    { id: 'shcedule', route: '/#shcedule', name: 'Cronograma' },
+    { id: 'story', route: '/#story', name: 'Historia' },
   ]
 
   const desktopRender = () => (

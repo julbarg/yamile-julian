@@ -1,0 +1,25 @@
+.line-menu {
+  .ul-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  li {
+    padding: 0 1rem;
+
+    .link-nav {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 1.2rem;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    .active {
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+}

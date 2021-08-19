@@ -4,7 +4,7 @@ import './Faq.scss'
 
 const Faq: FunctionComponent<{ faqs: FAQResponse[] }> = ({ faqs }) => {
   return (
-    <div className="faqs">
+    <div className="faqs" id="faq">
       <h2>Preguntas Frequentes</h2>
       <div className="faqs-container">
         {faqs.map((faq) => (
