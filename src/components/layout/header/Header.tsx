@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
 import useIsMobile from '../../../hooks/useIsMobile'
 import { LinkRef } from '../../../types/Types'
 import HamburgerMenu from '../navigation/HamburgerMenu/HamburgerMenu'
 import LineMenu from '../navigation/LineMenu/LineMenu'
+import { NavHashLink as Link } from 'react-router-hash-link'
 import './Header.scss'
 
 const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
@@ -14,7 +14,7 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
     { id: 'confirm', route: '/confirm', name: 'Confirmar Asistencia' },
     { id: 'faq', route: '/#faq', name: 'Preguntas Frecuentes' },
     { id: 'shcedule', route: '/#shcedule', name: 'Cronograma' },
-    { id: 'story', route: '/story', name: 'Historia' },
+    { id: 'poll', route: '/#poll', name: 'Encuesta' },
   ]
 
   const renderNotMain = () => (
@@ -22,7 +22,7 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
       <Link className="logo" to="/">
         <h1 className="title">Yamile & Julian</h1>
       </Link>
-      <LineMenu isMain={isMain} links={links} />
+      <LineMenu isMain={isMain} links={links.slice(1)} />
     </div>
   )
 
@@ -50,7 +50,9 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
           <p>19/12/2021 </p>
           <p className="town">Subachoque, Cundinamarca</p>
           <div className="container-button">
-            <button>Confirma tu Asistencia</button>
+            <Link className="logo" to="/confirm/#confirm-page">
+              <button>Confirma tu Asistencia</button>
+            </Link>
           </div>
         </div>
       )

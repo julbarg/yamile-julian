@@ -21,8 +21,16 @@ header {
   }
 
   a.logo {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
     flex: 1;
+
+    h1:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    h1:active {
+      color: rgba(255, 255, 255, 1);
+    }
   }
 
   h1.title {

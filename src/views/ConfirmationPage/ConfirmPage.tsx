@@ -5,7 +5,7 @@ import './ConfirmPage.scss'
 
 const ConfirmPage = () => {
   return (
-    <div className="confirm-page">
+    <div className="confirm-page" id="confirm-page">
       <Header isMain={false} />
       <Confirm />
     </div>

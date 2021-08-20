@@ -18,3 +18,14 @@ export interface Activity {
   icon: string
   hour: string
 }
+
+export interface Question {
+  id: string
+  question: string
+  options: OptionByQuestion[]
+}
+
+export interface OptionByQuestion {
+  id: string
+  description: string
+}

@@ -69,12 +69,12 @@ const Confirm = () => {
                   Hospedaje:
                   <input
                     type="radio"
-                    id="accommodation"
-                    name="yes"
+                    name="accommodation"
+                    id="yes"
                     value="yes"
                   />
                   <label htmlFor="yes">Si</label>
-                  <input type="radio" id="accommodation" name="no" value="no" />
+                  <input type="radio" name="accommodation" id="no" value="no" />
                   <label htmlFor="no">No</label>
                 </div>
               </li>
