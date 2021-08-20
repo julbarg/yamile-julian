@@ -3,7 +3,7 @@ import Faq from '../../components/faq/Faq'
 import Header from '../../components/layout/header/Header'
 import Schedule from '../../components/schedule/Schedule'
 import { FAQResponse } from '../../types/Types'
-import './HomePage.css'
+import './HomePage.scss'
 
 const HomePage = () => {
   const faqs: FAQResponse[] = [

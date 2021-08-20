@@ -10,6 +10,21 @@ header {
   height: 100vh;
   color: rgba(255, 255, 255, 0.8);
 
+  &.normal {
+    background-image: none;
+    height: 5vh;
+    background-color: #d5cbbf;
+
+    h1.title {
+      display: none;
+    }
+  }
+
+  a.logo {
+    color: rgba(255, 255, 255, 0.9);
+    flex: 1;
+  }
+
   h1.title {
     font-family: 'Style Script', cursive;
     font-size: 3.2rem;
@@ -72,14 +87,31 @@ header {
     height: 80vh;
     background-position-y: bottom;
 
-    div.line-menu {
+    &.normal {
+      height: 10vh;
+
+      h1.title {
+        display: block;
+        color: rgba($color: #fff, $alpha: 0.8);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .line-menu-container {
+        background-color: #3f4551;
+
+        .line-menu {
+          flex: 3;
+        }
+      }
+    }
+
+    div.line-menu-container {
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 0 2rem;
-    }
 
-    .line-menu {
       nav,
       h1 {
         flex: 1;

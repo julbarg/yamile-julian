@@ -82,6 +82,12 @@
         transform-origin: 0% 0%;
       }
     }
+
+    &.normal {
+      div {
+        background: #3f4551;
+      }
+    }
   }
 }
 

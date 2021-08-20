@@ -3,12 +3,15 @@ import { NavHashLink as Link } from 'react-router-hash-link'
 import { LinkRef } from '../../../../types/Types'
 import './HamburgerMenu.scss'
 
-const HamburgerMenu: FunctionComponent<{ links: LinkRef[] }> = ({ links }) => {
+const HamburgerMenu: FunctionComponent<{
+  links: LinkRef[]
+  isMain: boolean
+}> = ({ links, isMain = true }) => {
   return (
     <nav role="navigation">
       <div id="menuToggle">
         <input name="toggle" type="checkbox" />
-        <label htmlFor="toggle">
+        <label className={isMain ? '' : 'normal'} htmlFor="toggle">
           <span>menu</span>
           <div></div>
           <div></div>

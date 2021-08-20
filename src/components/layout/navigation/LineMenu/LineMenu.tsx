@@ -3,7 +3,9 @@ import './LineMenu.scss'
 import { LinkRef } from '../../../../types/Types'
 import { NavHashLink as Link } from 'react-router-hash-link'
 
-const LineMenu: FunctionComponent<{ links: LinkRef[] }> = ({ links }) => {
+const LineMenu: FunctionComponent<{ links: LinkRef[]; isMain: boolean }> = ({
+  links,
+}) => {
   return (
     <nav className="line-menu">
       <ul className="ul-nav">
