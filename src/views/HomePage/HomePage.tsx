@@ -3,32 +3,16 @@ import Faq from '../../components/faq/Faq'
 import Header from '../../components/layout/header/Header'
 import Poll from '../../components/poll/Poll'
 import Schedule from '../../components/schedule/Schedule'
-import { FAQResponse } from '../../types/Types'
+import { activities, faqs, questions } from './data/Data'
 import './HomePage.scss'
 
 const HomePage = () => {
-  const faqs: FAQResponse[] = [
-    {
-      question: '¿Donde se llevara a cabo la ceremonia?',
-      answer:
-        'Velit labore laborum sint sit veniam tempor culpa magna. Quis incididunt non pariatur non id eu excepteur nostrud Lorem ipsum. Et eu nisi velit dolor nisi voluptate.',
-      id: '1',
-      image: './img/lavictoria.jpeg',
-    },
-    {
-      question: '¿Donde se llevara a cabo la ceremonia?',
-      answer:
-        'Velit labore laborum sint sit veniam tempor culpa magna. Quis incididunt non pariatur non id eu excepteur nostrud Lorem ipsum. Et eu nisi velit dolor nisi voluptate.',
-      id: '2',
-      image: './img/lavictoria.jpeg',
-    },
-  ]
   return (
     <div className="home-page">
       <Header />
       <Faq faqs={faqs} />
-      <Schedule />
-      <Poll />
+      <Schedule activities={activities} />
+      <Poll questions={questions} />
     </div>
   )
 }
