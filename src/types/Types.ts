@@ -5,27 +5,33 @@ export interface LinkRef {
 }
 
 export interface FAQResponse {
-  answer: string
-  question: string
+  answer?: string
+  question?: string
   image?: string
   id: string
 }
 
 export interface Activity {
   id: string
-  activity: string
-  description: string
-  icon: string
-  hour: string
+  activity?: string
+  description?: string
+  icon?: string
+  hour?: string
 }
 
 export interface Question {
   id: string
-  question: string
-  options: OptionByQuestion[]
+  question?: string
+  options?: OptionByQuestion[]
+  totalVotes?: number
 }
 
 export interface OptionByQuestion {
-  id: string
-  description: string
+  id?: string
+  option?: string
+  numberVotes?: number
+}
+
+export interface Answers {
+  [key: string]: string
 }

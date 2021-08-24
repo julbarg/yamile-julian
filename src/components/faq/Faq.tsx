@@ -1,8 +1,29 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { db } from '../../config/firebase'
 import { FAQResponse } from '../../types/Types'
 import './Faq.scss'
 
-const Faq: FunctionComponent<{ faqs: FAQResponse[] }> = ({ faqs }) => {
+const Faq: FunctionComponent = () => {
+  const [faqs, setFaqs] = useState([] as FAQResponse[])
+
+  const getFaqs = async () => {
+    const queryFaqs: FAQResponse[] = []
+    db.collection('faq').onSnapshot((faqSnapshot) => {
+      faqSnapshot.forEach((faq) => {
+        queryFaqs.push({
+          ...faq.data(),
+          id: faq.id,
+        })
+      })
+
+      setFaqs(queryFaqs)
+    })
+  }
+
+  useEffect(() => {
+    getFaqs()
+  }, [])
+
   return (
     <div className="faqs" id="faq">
       <h2>Preguntas Frequentes</h2>

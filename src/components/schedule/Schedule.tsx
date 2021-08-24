@@ -1,10 +1,25 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { db } from '../../config/firebase'
 import { Activity } from '../../types/Types'
 import './Schedule.scss'
 
-const Schedule: FunctionComponent<{ activities: Activity[] }> = ({
-  activities,
-}) => {
+const Schedule: FunctionComponent = () => {
+  const [activities, setActivities] = useState([] as Activity[])
+
+  useEffect(() => {
+    const queryActivities: Activity[] = []
+    db.collection('activity').onSnapshot((activitySnapshot) => {
+      activitySnapshot.forEach((activity) => {
+        queryActivities.push({
+          ...activity.data(),
+          id: activity.id,
+        })
+      })
+
+      setActivities(queryActivities)
+    })
+  }, [])
+
   return (
     <div className="schedule" id="shcedule">
       <h2>Yamile & Julian</h2>

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import firebase from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/firestore'
@@ -20,3 +17,4 @@ const fb = firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 
 export const db = fb.firestore()
+export const firestore = firebase.firestore
