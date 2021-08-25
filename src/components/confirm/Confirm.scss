@@ -97,6 +97,8 @@ div.confirm {
 
         div {
           grid-column: 1 / 3;
+          display: grid;
+          align-content: center;
         }
 
         button {
@@ -111,6 +113,10 @@ div.confirm {
         label {
           padding-left: 0.5rem;
         }
+      }
+
+      .all-li {
+        margin-bottom: 1rem;
       }
 
       .secondary {

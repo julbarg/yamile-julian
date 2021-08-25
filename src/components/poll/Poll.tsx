@@ -18,11 +18,11 @@ const Poll: FunctionComponent = () => {
   const getQuestion = async () => {
     setLoading(true)
     const pollRef = db.collection('poll')
-    let activeRef = await pollRef.get()
+    const activeRef = await pollRef.get()
     const queryQuestions: Question[] = []
 
     for (const poll of activeRef.docs) {
-      let optionRef = await pollRef.doc(poll.id).collection('options').get()
+      const optionRef = await pollRef.doc(poll.id).collection('options').get()
       const queryOptions: OptionByQuestion[] = []
       for (const option of optionRef.docs) {
         queryOptions.push({

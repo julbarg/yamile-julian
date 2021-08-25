@@ -35,3 +35,34 @@ export interface OptionByQuestion {
 export interface Answers {
   [key: string]: string
 }
+
+export interface ConfirmResponse {
+  id: string
+  mainPerson?: string
+  showAccommodation?: boolean
+  family?: Person[]
+}
+
+export interface Person {
+  id: string
+  name?: string
+  confirm?: boolean
+  wantsAccommodation?: boolean
+}
+
+export interface Guest {
+  id: string
+  idFamily: string
+  name?: string
+  showAccommodation?: boolean
+  confirm?: boolean
+  wantsAccommodation?: boolean
+}
+
+export interface ConfirmedGuest {
+  [key: string]: {
+    idFamily: string
+    confirm?: boolean
+    wantsAccommodation?: boolean
+  }
+}
