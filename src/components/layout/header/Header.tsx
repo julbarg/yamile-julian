@@ -38,7 +38,6 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
 
   const mobileVersion = () => (
     <div>
-      <HamburgerMenu isMain={isMain} links={links} />
       <h1 className="title">Yamile & Julian</h1>
     </div>
   )
@@ -62,10 +61,17 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
   }
 
   return (
-    <header className={isMain ? '' : 'normal'}>
-      {isMobile ? mobileVersion() : isMain ? desktopRender() : renderNotMain()}
-      {renderHero()}
-    </header>
+    <>
+      {isMobile ? <HamburgerMenu isMain={isMain} links={links} /> : null}
+      <header className={isMain ? '' : 'normal'} id="top">
+        {isMobile
+          ? mobileVersion()
+          : isMain
+          ? desktopRender()
+          : renderNotMain()}
+        {renderHero()}
+      </header>
+    </>
   )
 }
 

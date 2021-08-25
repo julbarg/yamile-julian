@@ -7,6 +7,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --quiet",
     "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
@@ -20,7 +21,6 @@
   "devDependencies": {
     "@babel/core": "7.12.16",
     "@babel/eslint-parser": "7.13.4",
-    "@babel/plugin-proposal-class-properties": "7.13.0",
     "@babel/preset-env": "7.13.5",
     "@babel/preset-react": "7.12.13",
     "@types/react": "^17.0.2",

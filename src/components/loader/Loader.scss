@@ -1,0 +1,25 @@
+div.loader {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  h1 {
+    font-family: 'Style Script', cursive;
+    font-size: 4rem;
+    padding: 0 3rem;
+    line-height: 50px;
+    text-align: center;
+    flex: 1;
+    margin-top: 3rem;
+  }
+
+  .loading-bars {
+    margin: 0 auto;
+  }
+}
