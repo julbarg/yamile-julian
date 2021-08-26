@@ -4,10 +4,11 @@
   "description": "Yamile & Julian se casan. Aplicacion para confirmar invitados",
   "main": "src/index.html",
   "scripts": {
+    "build": "rm -rf dist && parcel build src/index.html --no-source-maps",
+    "start": "parcel src/index.html",
+    "watch": "parcel watch src/index.html",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --quiet",
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
