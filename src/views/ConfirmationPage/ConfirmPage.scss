@@ -1,5 +1,11 @@
 .confirm-page {
   width: 100%;
+  background-color: #d5cbbf;
+  background-image: url(../../assets/images/confirm-bg3.png);
+  background-size: cover;
+  background-position-x: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 
   div.loading {
     display: flex;
@@ -13,7 +19,13 @@
     }
   }
 
+  @media (min-width: 769px) {
+    background-position-x: right;
+    background-image: url(../../assets/images/confirm-bg2.png);
+  }
+
   @media (min-width: 1280px) {
     width: 1280px;
+    background-position-x: left;
   }
 }

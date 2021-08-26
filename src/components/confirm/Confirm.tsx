@@ -1,33 +1,32 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Confirm.scss'
 import { db } from '../../config/firebase'
 import {
   ConfirmedGuest,
   ConfirmResponse,
   Guest,
+  IPersonResult,
   Person,
 } from '../../types/Types'
 import ReactLoading from 'react-loading'
+import PersonResults from './personResults/PersonResults'
+import PersonSearch from './personSearch/PersonSearch'
+import PersonConfirm from './personConfirm/PersonConfirm'
 
 const Confirm = () => {
+  const [confirmResponse, setConfirmResponse] = useState(
+    [] as ConfirmResponse[]
+  )
+  const [showSelect, setShowSelect] = useState(false)
   const [guests, setGuests] = useState([] as Guest[])
   const [loading, setLoading] = useState(false)
-  const [selectActive, setSelectActive] = useState(false)
-  const [confirmActive, setConfirmActive] = useState(false)
-  const [name, setName] = useState('' as string)
-  const [filteredGuest, setFilteredGuest] = useState([] as Guest[])
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [filteredGuest, setFilteredGuest] = useState([] as IPersonResult[])
   const [membersOfFamily, setMembersOfFamily] = useState([] as Guest[])
-  const [confirmedMembersOfFamily, setConfirmedMembersOfFamily] = useState(
-    {} as ConfirmedGuest
-  )
   const [showAccommodation, setShowAccommodation] = useState(false)
-  const [isAllSelected, setIsAllSelected] = useState(false)
-  const [
-    isAllSelectedWithAccommodation,
-    setIsAllSelectedWithAccommodation,
-  ] = useState(false)
+  const [showResult, setShowResult] = useState(false)
 
-  const getConfirm = async () => {
+  const getConfirmResponse = async () => {
     setLoading(true)
     const confirmRef = db.collection('confirm')
     const activeRef = await confirmRef.get()
@@ -39,6 +38,7 @@ const Confirm = () => {
         .collection('family')
         .get()
       const queryFamily: Person[] = []
+
       for (const person of personRef.docs) {
         queryFamily.push({
           id: person.id,
@@ -53,14 +53,17 @@ const Confirm = () => {
       })
     }
 
-    setGuests(mapConfirmArrayToGuestArray(queryConfirm))
-    console.log(guests)
+    setConfirmResponse(queryConfirm)
     setLoading(false)
   }
 
-  /*useEffect(() => {
-    getConfirm()
-  }, [])*/
+  useEffect(() => {
+    getConfirmResponse()
+  }, [])
+
+  useEffect(() => {
+    setGuests(mapConfirmArrayToGuestArray(confirmResponse))
+  }, [confirmResponse])
 
   const mapConfirmArrayToGuestArray = (
     confirmResponse: ConfirmResponse[]
@@ -82,6 +85,35 @@ const Confirm = () => {
     return resultGuests
   }
 
+  const search = (name: string) => {
+    const nameParts = name.split(/\s+/)
+    const filtered: IPersonResult[] = guests
+      .filter(({ name }) => {
+        const nameNormalize = name
+          ?.normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toUpperCase()
+
+        return nameParts.every((part) => {
+          const partNormalize = part
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toUpperCase()
+
+          return nameNormalize?.includes(partNormalize)
+        })
+      })
+      .map((guest) => ({
+        id: guest.id,
+        name: guest.name,
+        idFamily: guest.idFamily,
+      }))
+
+    setFilteredGuest(filtered)
+    setShowSelect(true)
+    setShowConfirm(false)
+  }
+
   const renderLoading = () => (
     <div className="loading">
       <div className="loading-title">Cargando...</div>
@@ -89,242 +121,64 @@ const Confirm = () => {
     </div>
   )
 
-  useEffect(() => {
-    setConfirmActive(false)
-    const nameParts = name.split(/\s+/)
-    const filtered = guests.filter(({ name }) => {
-      const nameNormalize = name
-        ?.normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toUpperCase()
-
-      return nameParts.every((part) => {
-        const partNormalize = part
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .toUpperCase()
-
-        return nameNormalize?.includes(partNormalize)
-      })
-    })
-    setFilteredGuest(filtered)
-    setSelectActive(true)
-    setIsAllSelected(filtered.every((guest) => guest.confirm))
-    setIsAllSelectedWithAccommodation(
-      filtered.every((guest) => guest.wantsAccommodation)
-    )
-  }, [guests, name])
-
   const getFamily = (idFamily: string) => {
+    if (idFamily.length == 0) return
     const filteredGuest = guests.filter((guest) => guest.idFamily == idFamily)
-
     setShowAccommodation(filteredGuest.some((guest) => guest.showAccommodation))
 
-    const tmpConfirmedMembersOfFamily = { ...confirmedMembersOfFamily }
-    filteredGuest.forEach((guest) => {
-      tmpConfirmedMembersOfFamily[guest.id] = {
-        idFamily,
-        confirm: guest.confirm,
-        wantsAccommodation: guest.wantsAccommodation,
-      }
-    })
-
-    setConfirmedMembersOfFamily(tmpConfirmedMembersOfFamily)
-
     setMembersOfFamily(filteredGuest)
-    setConfirmActive(true)
+    setShowConfirm(true)
   }
 
-  const addOrRemoveConfirmedGuest = (
-    e: ChangeEvent<HTMLInputElement>,
-    id: string
-  ) => {
-    const checked = e.target.checked
-    let tmpConfirmedMembersOfFamily = { ...confirmedMembersOfFamily }
-
-    tmpConfirmedMembersOfFamily[id].confirm = checked
-
-    setConfirmedMembersOfFamily(tmpConfirmedMembersOfFamily)
-  }
-
-  const addOrRemoveAccomodation = (wantsAccommodation: boolean, id: string) => {
-    let tmpConfirmedMembersOfFamily = { ...confirmedMembersOfFamily }
-
-    tmpConfirmedMembersOfFamily[id].wantsAccommodation = wantsAccommodation
-
-    setConfirmedMembersOfFamily(tmpConfirmedMembersOfFamily)
-  }
-
-  const confirmAll = (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked
-    setIsAllSelected(checked)
-
-    let tmpConfirmedMembersOfFamily = { ...confirmedMembersOfFamily }
-
-    for (const key in tmpConfirmedMembersOfFamily) {
-      tmpConfirmedMembersOfFamily[key].confirm = checked
+  const confirm = async (confirmedMembersOfFamily: ConfirmedGuest) => {
+    setLoading(true)
+    for (const key in confirmedMembersOfFamily) {
+      const guest = confirmedMembersOfFamily[key]
+      await db
+        .collection('confirm')
+        .doc(guest.idFamily)
+        .collection('family')
+        .doc(key)
+        .update({
+          confirm: guest.confirm,
+          wantsAccommodation: guest.confirm && guest.wantsAccommodation,
+        })
     }
-
-    setConfirmedMembersOfFamily(tmpConfirmedMembersOfFamily)
+    getConfirmResponse()
+    setShowResult(true)
+    setLoading(false)
   }
 
-  const confirmAllAccommodation = (e: ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked
-    setIsAllSelectedWithAccommodation(checked)
-
-    let tmpConfirmedMembersOfFamily = { ...confirmedMembersOfFamily }
-
-    for (const key in tmpConfirmedMembersOfFamily) {
-      tmpConfirmedMembersOfFamily[key].wantsAccommodation = checked
-    }
-
-    setConfirmedMembersOfFamily(tmpConfirmedMembersOfFamily)
+  const reset = () => {
+    setShowResult(false)
+    setShowSelect(false)
+    setShowConfirm(false)
+    setMembersOfFamily([])
   }
+
+  const renderResult = () => (
+    <div className="loading">
+      <h3>Gracias Por Confirmar tu Asistencia. </h3>
+      <h3>Nos vemos pronto</h3>
+      <button className="button-reset box-shadow" onClick={reset}>
+        Realizar otra busqueda
+      </button>
+    </div>
+  )
 
   const renderConfirmForm = () => {
     return (
       <div className="confirm-container">
-        <div className="step">
-          <div className="box number">1.</div>
-          <div className="box title">Busca tu nombre</div>
-          <div className="box task">
-            <div>
-              Busca tu nombre usando el campo de texto y luego da clic en el
-              boton <strong>Buscar</strong>
-            </div>
-
-            <div className="actions">
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="box-shadow"
-                type="text"
-              />
-              <button className="box-shadow" onClick={getConfirm}>
-                Buscar
-              </button>
-            </div>
-          </div>
-        </div>
-        {loading ? (
-          renderLoading()
-        ) : selectActive ? (
-          <div className="step">
-            <div className="box number">2.</div>
-            <div className="box title">Selecciona tu nombre</div>
-            <div className="box task">
-              <div>
-                Selecciona tu nombre de la lista dando clic al boton{' '}
-                <strong>Seleccionar</strong> al lado del nombre que te
-                corresponda
-              </div>
-
-              <ul>
-                {filteredGuest.map((guest) => (
-                  <li key={guest.id}>
-                    <div className="results box-shadow">
-                      <div>{guest.name}</div>
-                      <button onClick={() => getFamily(guest.idFamily)}>
-                        Seleccionar
-                      </button>
-                    </div>
-                  </li>
-                ))}
-                {filteredGuest.length == 0 ? (
-                  <h3>No se encontraron conincidencias. Intenta de nuevo</h3>
-                ) : null}
-              </ul>
-            </div>
-          </div>
+        <PersonSearch onSubmit={search} />
+        {showSelect ? (
+          <PersonResults people={filteredGuest} onClick={getFamily} />
         ) : null}
-        {confirmActive ? (
-          <div className="step">
-            <div className="box number">3.</div>
-            <div className="box title">Confirma Asistencia</div>
-            <div className="box task">
-              <div>
-                Selecciona las personas de tu nucleo familiar que van a asisitir
-                y da clic en el boton <strong>Confirmar</strong>
-              </div>
-              <ul>
-                <li className="all-li">
-                  <div className="people box-shadow all">
-                    <input
-                      type="checkbox"
-                      id="all-checked"
-                      value="all-checked"
-                      checked={isAllSelected}
-                      onChange={(e) => confirmAll(e)}
-                    />
-                    <label htmlFor="all-checked">Confirmar Todos</label>
-                  </div>
-                  {showAccommodation && isAllSelected ? (
-                    <div className="secondary box-shadow accommodation-all">
-                      <input
-                        type="checkbox"
-                        id="all-accommodation"
-                        value="all-accommodation"
-                        onChange={(e) => confirmAllAccommodation(e)}
-                        checked={isAllSelectedWithAccommodation}
-                      />
-                      <label htmlFor="all-accommodation">
-                        Todos con Hospedaje
-                      </label>
-                    </div>
-                  ) : null}
-                </li>
-                {membersOfFamily.map((guest) => (
-                  <li key={guest.id}>
-                    <div className="people box-shadow">
-                      <input
-                        type="checkbox"
-                        id={guest.id}
-                        value={guest.id}
-                        checked={confirmedMembersOfFamily[guest.id].confirm}
-                        onChange={(e) => addOrRemoveConfirmedGuest(e, guest.id)}
-                      />
-                      <label htmlFor={guest.id}>{guest.name}</label>
-                    </div>
-                    {showAccommodation &&
-                    confirmedMembersOfFamily[guest.id].confirm ? (
-                      <div className="secondary box-shadow">
-                        Hospedaje:
-                        <input
-                          type="radio"
-                          name={`accommodation-${guest.id}`}
-                          id={`yes-${guest.id}`}
-                          value="yes"
-                          checked={
-                            confirmedMembersOfFamily[guest.id]
-                              .wantsAccommodation
-                          }
-                          onChange={() =>
-                            addOrRemoveAccomodation(true, guest.id)
-                          }
-                        />
-                        <label htmlFor={`yes-${guest.id}`}>Si</label>
-                        <input
-                          type="radio"
-                          name={`accommodation-${guest.id}`}
-                          value="no"
-                          id={`no-${guest.id}`}
-                          checked={
-                            !confirmedMembersOfFamily[guest.id]
-                              .wantsAccommodation
-                          }
-                          onChange={() =>
-                            addOrRemoveAccomodation(false, guest.id)
-                          }
-                        />
-                        <label htmlFor={`no-${guest.id}`}>No</label>
-                      </div>
-                    ) : null}
-                  </li>
-                ))}
-              </ul>
-              <button className="button-confirm box-shadow">Confirmar</button>
-            </div>
-          </div>
+        {showConfirm ? (
+          <PersonConfirm
+            people={membersOfFamily}
+            showAccommodation={showAccommodation}
+            onSubmit={confirm}
+          />
         ) : null}
       </div>
     )
@@ -333,7 +187,12 @@ const Confirm = () => {
   return (
     <div className="confirm">
       <h2>Confirmar Asistencia</h2>
-      {renderConfirmForm()}
+      {}
+      {loading
+        ? renderLoading()
+        : showResult
+        ? renderResult()
+        : renderConfirmForm()}
     </div>
   )
 }

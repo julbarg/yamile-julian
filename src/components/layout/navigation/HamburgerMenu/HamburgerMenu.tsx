@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, MutableRefObject, useRef } from 'react'
 import { NavHashLink as Link } from 'react-router-hash-link'
 import { LinkRef } from '../../../../types/Types'
 import './HamburgerMenu.scss'
@@ -7,10 +7,18 @@ const HamburgerMenu: FunctionComponent<{
   links: LinkRef[]
   isMain: boolean
 }> = ({ links, isMain = true }) => {
+  const toggleCheckbox: MutableRefObject<HTMLInputElement | null> = useRef(null)
+
+  const checkToggle = () => {
+    if (toggleCheckbox && toggleCheckbox.current) {
+      toggleCheckbox.current.checked = false
+    }
+  }
+
   return (
     <nav role="navigation">
       <div id="menuToggle">
-        <input name="toggle" type="checkbox" />
+        <input name="toggle" type="checkbox" ref={toggleCheckbox} />
         <label className={isMain ? '' : 'normal'} htmlFor="toggle">
           <span>menu</span>
           <div></div>
@@ -25,6 +33,7 @@ const HamburgerMenu: FunctionComponent<{
                 activeClassName="active"
                 smooth={true}
                 exact
+                onClick={checkToggle}
               >
                 {link.name}
               </Link>

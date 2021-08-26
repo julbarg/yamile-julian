@@ -59,6 +59,12 @@ export interface Guest {
   wantsAccommodation?: boolean
 }
 
+export interface IPersonResult {
+  id: string
+  name?: string
+  idFamily: string
+}
+
 export interface ConfirmedGuest {
   [key: string]: {
     idFamily: string
