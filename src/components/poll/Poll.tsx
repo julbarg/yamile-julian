@@ -3,17 +3,21 @@ import React, {
   FunctionComponent,
   useState,
   useEffect,
+  useContext,
 } from 'react'
 import { Answers, OptionByQuestion, Question } from '../../types/Types'
-import { db, firestore } from '../../config/firebase'
+import { firestore } from '../../config/firebase'
 import './Poll.scss'
-import ReactLoading from 'react-loading'
+
+import { DBContext } from '../../App'
+import Loading from '../loading/Loading'
 
 const Poll: FunctionComponent = () => {
   const [answers, setAnswers] = useState({} as Answers)
   const [questions, setQuestions] = useState([] as Question[])
   const [showResults, setShowResults] = useState(false)
   const [loading, setLoading] = useState(false)
+  const db = useContext(DBContext)
 
   const getQuestion = async () => {
     setLoading(true)
@@ -72,13 +76,6 @@ const Poll: FunctionComponent = () => {
     setAnswers({})
     setLoading(false)
   }
-
-  const renderLoading = () => (
-    <div className="loading">
-      <div className="loading-title">Cargando...</div>
-      <ReactLoading type="bars" color="#3f4551" width={72} />
-    </div>
-  )
 
   const renderQuestions = () => (
     <form
@@ -167,11 +164,13 @@ const Poll: FunctionComponent = () => {
   return (
     <div className="poll" id="poll">
       <h2>Encuesta</h2>
-      {loading
-        ? renderLoading()
-        : showResults
-        ? renderResults()
-        : renderQuestions()}
+      {loading ? (
+        <Loading />
+      ) : showResults ? (
+        renderResults()
+      ) : (
+        renderQuestions()
+      )}
     </div>
   )
 }

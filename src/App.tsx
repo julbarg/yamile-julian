@@ -1,16 +1,18 @@
-import React, { FunctionComponent, StrictMode, lazy, Suspense } from 'react'
+import React, { FunctionComponent, StrictMode } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Loader from './components/loader/Loader'
 import NotFound from './components/notFound/NotFound'
+import { db } from './config/firebase'
+import './config/firebase'
 import ConfirmPage from './views/ConfirmationPage/ConfirmPage'
+import HomePage from './views/HomePage/HomePage'
 
-const HomePage = lazy(() => import('./views/HomePage/HomePage'))
+export const DBContext = React.createContext(db)
 
 const App: FunctionComponent = () => {
   return (
     <div className="app">
-      <Suspense fallback={<Loader />}>
+      <DBContext.Provider value={db}>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -24,7 +26,7 @@ const App: FunctionComponent = () => {
             </Route>
           </Switch>
         </Router>
-      </Suspense>
+      </DBContext.Provider>
     </div>
   )
 }

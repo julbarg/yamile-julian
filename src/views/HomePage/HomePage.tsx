@@ -1,4 +1,3 @@
-import React from 'react'
 import Faq from '../../components/faq/Faq'
 import Header from '../../components/layout/header/Header'
 import Poll from '../../components/poll/Poll'

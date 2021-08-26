@@ -32,25 +32,6 @@ div.confirm {
     }
   }
 
-  .loading {
-    display: grid;
-    justify-content: center;
-    align-content: center;
-    height: 50vh;
-
-    h3 {
-      line-height: 1.2;
-      font-size: 1.8rem;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-    }
-
-    button {
-      margin: 1.5rem 0;
-    }
-  }
-
   h2 {
     padding-top: 1.5rem;
     line-height: 1;

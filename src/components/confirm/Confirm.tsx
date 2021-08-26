@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Confirm.scss'
-import { db } from '../../config/firebase'
+import { DBContext } from '../../App'
 import {
   ConfirmedGuest,
   ConfirmResponse,
@@ -8,10 +8,10 @@ import {
   IPersonResult,
   Person,
 } from '../../types/Types'
-import ReactLoading from 'react-loading'
 import PersonResults from './personResults/PersonResults'
 import PersonSearch from './personSearch/PersonSearch'
 import PersonConfirm from './personConfirm/PersonConfirm'
+import Loading from '../loading/Loading'
 
 const Confirm = () => {
   const [confirmResponse, setConfirmResponse] = useState(
@@ -25,6 +25,7 @@ const Confirm = () => {
   const [membersOfFamily, setMembersOfFamily] = useState([] as Guest[])
   const [showAccommodation, setShowAccommodation] = useState(false)
   const [showResult, setShowResult] = useState(false)
+  const db = useContext(DBContext)
 
   const getConfirmResponse = async () => {
     setLoading(true)
@@ -114,13 +115,6 @@ const Confirm = () => {
     setShowConfirm(false)
   }
 
-  const renderLoading = () => (
-    <div className="loading">
-      <div className="loading-title">Cargando...</div>
-      <ReactLoading type="bars" color="#3f4551" width={72} />
-    </div>
-  )
-
   const getFamily = (idFamily: string) => {
     if (idFamily.length == 0) return
     const filteredGuest = guests.filter((guest) => guest.idFamily == idFamily)
@@ -188,11 +182,13 @@ const Confirm = () => {
     <div className="confirm">
       <h2>Confirmar Asistencia</h2>
       {}
-      {loading
-        ? renderLoading()
-        : showResult
-        ? renderResult()
-        : renderConfirmForm()}
+      {loading ? (
+        <Loading />
+      ) : showResult ? (
+        renderResult()
+      ) : (
+        renderConfirmForm()
+      )}
     </div>
   )
 }
