@@ -6,5 +6,6 @@
         "runtime": "automatic"
       }
     ]
-  ]
+  ],
+  "plugins": [["@babel/plugin-proposal-optional-chaining", {}, "unique-name"]]
 }
