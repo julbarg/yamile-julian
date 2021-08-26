@@ -21,7 +21,7 @@ const PersonSearch: FunctionComponent<{
 
   return (
     <div className="step">
-      <div className="box number">1.</div>
+      <div className="box number">{'1.'}</div>
       <div className="box title">Busca tu nombre</div>
       <div className="box task">
         <div>
