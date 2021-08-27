@@ -50,7 +50,7 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
           <p className="town">Subachoque, Cundinamarca</p>
           <div className="container-button">
             <Link className="logo" to="/confirm/#confirm-page">
-              <button>Confirma tu Asistencia</button>
+              <button>Confirma tu asistencia</button>
             </Link>
           </div>
         </div>

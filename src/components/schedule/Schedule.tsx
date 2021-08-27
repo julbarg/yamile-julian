@@ -6,28 +6,36 @@ import './Schedule.scss'
 
 const Schedule: FunctionComponent = () => {
   const [activities, setActivities] = useState([] as Activity[])
-  const [loading, setLoading] = useState(false)
+  const [loadingSchedule, setLoadingSchedule] = useState(false)
 
   useEffect(() => {
-    setLoading(true)
+    setLoadingSchedule(true)
     const queryActivities: Activity[] = []
-    db.collection('activity').onSnapshot((activitySnapshot) => {
-      activitySnapshot.forEach((activity) => {
-        queryActivities.push({
-          ...activity.data(),
-          id: activity.id,
+    db.collection('activity').onSnapshot(
+      (activitySnapshot) => {
+        activitySnapshot.forEach((activity) => {
+          queryActivities.push({
+            ...activity.data(),
+            id: activity.id,
+          })
         })
-      })
 
-      setActivities(queryActivities)
-      setLoading(false)
-    })
+        setActivities(queryActivities)
+      },
+      (error) => {
+        console.error(error)
+      }
+    )
   }, [])
+
+  useEffect(() => {
+    setLoadingSchedule(activities.length == 0)
+  }, [activities])
 
   return (
     <div className="schedule" id="shcedule">
       <h2>Yamile & Julian</h2>
-      {loading ? (
+      {loadingSchedule ? (
         <Loading color="white" />
       ) : (
         <>

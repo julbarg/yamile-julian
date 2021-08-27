@@ -6,32 +6,48 @@ import './Faq.scss'
 
 const Faq: FunctionComponent = () => {
   const [faqs, setFaqs] = useState([] as FAQResponse[])
-  const [loading, setLoading] = useState(false)
+  const [loadingFaq, setLoadingFaq] = useState(false)
 
   const getFaqs = () => {
     const queryFaqs: FAQResponse[] = []
-    setLoading(true)
-    db.collection('faq').onSnapshot((faqSnapshot) => {
-      faqSnapshot.forEach((faq) => {
-        queryFaqs.push({
-          ...faq.data(),
-          id: faq.id,
-        })
-      })
+    setLoadingFaq(true)
+    db.collection('faq').onSnapshot(
+      (faqSnapshot) => {
+        faqSnapshot.forEach((faq) => {
+          console.log(faq.data())
 
-      setFaqs(queryFaqs)
-      setLoading(false)
-    })
+          queryFaqs.push({
+            ...faq.data(),
+            id: faq.id,
+          })
+        })
+
+        setFaqs(queryFaqs)
+      },
+      (error) => {
+        console.error(error)
+      }
+    )
   }
 
   useEffect(() => {
     getFaqs()
   }, [])
 
+  useEffect(() => {
+    setLoadingFaq(false)
+  }, [faqs])
+
+  const iframe = (iframeHtml: string) => {
+    return {
+      __html: iframeHtml,
+    }
+  }
+
   return (
     <div className="faqs" id="faq">
-      <h2>Preguntas Frequentes</h2>
-      {loading ? (
+      <h2>Preguntas frecuentes</h2>
+      {loadingFaq ? (
         <Loading />
       ) : (
         <div className="faqs-container">
@@ -39,7 +55,10 @@ const Faq: FunctionComponent = () => {
             <div className="faq" key={faq.id}>
               <h3>{faq.question}</h3>
               {faq.image ? <img src={faq.image} alt={faq.question} /> : null}
-              <p>{faq.answer}</p>
+              {faq.iframe ? (
+                <div dangerouslySetInnerHTML={iframe(faq.iframe)} />
+              ) : null}
+              {faq.answer ? <p>{faq.answer}</p> : null}
             </div>
           ))}
         </div>

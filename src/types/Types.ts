@@ -8,6 +8,7 @@ export interface FAQResponse {
   answer?: string
   question?: string
   image?: string
+  iframe?: string
   id: string
 }
 
