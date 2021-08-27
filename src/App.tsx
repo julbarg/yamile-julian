@@ -3,17 +3,20 @@ import React, {
   StrictMode,
   useEffect,
   useState,
+  lazy,
+  Suspense,
 } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NotFound from './components/notFound/NotFound'
 import { db, firebaseI } from './config/firebase'
 import './config/firebase'
-import ConfirmPage from './views/ConfirmationPage/ConfirmPage'
-import HomePage from './views/HomePage/HomePage'
 import Loading from './components/loading/Loading'
 
 export const DBContext = React.createContext(db)
+
+const HomePage = lazy(() => import('./views/HomePage/HomePage'))
+const ConfirmPage = lazy(() => import('./views/ConfirmationPage/ConfirmPage'))
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -36,19 +39,21 @@ const App: FunctionComponent = () => {
         <Loading />
       ) : (
         <DBContext.Provider value={db}>
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route path="/confirm">
-                <ConfirmPage />
-              </Route>
-              <Route>
-                <NotFound />
-              </Route>
-            </Switch>
-          </Router>
+          <Suspense fallback={Loading}>
+            <Router>
+              <Switch>
+                <Route exact path="/">
+                  <HomePage />
+                </Route>
+                <Route path="/confirm">
+                  <ConfirmPage />
+                </Route>
+                <Route>
+                  <NotFound />
+                </Route>
+              </Switch>
+            </Router>
+          </Suspense>
         </DBContext.Provider>
       )}
     </div>
