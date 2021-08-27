@@ -3,8 +3,8 @@ import React, {
   StrictMode,
   useEffect,
   useState,
-  lazy,
   Suspense,
+  lazy,
 } from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
