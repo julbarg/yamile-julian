@@ -19,12 +19,12 @@ const Confirm = () => {
   )
   const [showSelect, setShowSelect] = useState(false)
   const [guests, setGuests] = useState([] as Guest[])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [showConfirm, setShowConfirm] = useState(false)
   const [filteredGuest, setFilteredGuest] = useState([] as IPersonResult[])
   const [membersOfFamily, setMembersOfFamily] = useState([] as Guest[])
   const [showAccommodation, setShowAccommodation] = useState(false)
-  const [showResult, setShowResult] = useState(true)
+  const [showResult, setShowResult] = useState(false)
   const db = useContext(DBContext)
 
   const getConfirmResponse = async () => {
