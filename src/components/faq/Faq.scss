@@ -34,6 +34,14 @@
     flex-wrap: wrap;
   }
 
+  div.iframe-container {
+    width: 100%;
+  }
+
+  iframe {
+    width: 100%;
+  }
+
   @media (min-width: 769px) {
     padding: 2rem;
     h3 {

@@ -16,11 +16,10 @@ const Poll: FunctionComponent = () => {
   const [answers, setAnswers] = useState({} as Answers)
   const [questions, setQuestions] = useState([] as Question[])
   const [showResults, setShowResults] = useState(false)
-  const [loadingPoll, setLoadingPoll] = useState(false)
+  const [loading, setLoading] = useState(true)
   const db = useContext(DBContext)
 
   const getQuestion = async () => {
-    setLoadingPoll(true)
     const pollRef = db.collection('poll')
     const activeRef = await pollRef.get()
     const queryQuestions: Question[] = []
@@ -42,22 +41,19 @@ const Poll: FunctionComponent = () => {
       })
     }
     setQuestions(queryQuestions)
+    setLoading(false)
   }
 
   useEffect(() => {
     getQuestion()
   }, [])
 
-  useEffect(() => {
-    setLoadingPoll(questions.length == 0)
-  }, [questions])
-
   const updateAnswer = (e: ChangeEvent<HTMLInputElement>) => {
     setAnswers({ ...answers, [e.target.name]: e.target.value })
   }
 
   const sendPoll = async () => {
-    setLoadingPoll(true)
+    setLoading(true)
     const increment = firestore.FieldValue.increment(1)
 
     for (const pollId in answers) {
@@ -77,7 +73,7 @@ const Poll: FunctionComponent = () => {
     await getQuestion()
     setShowResults(true)
     setAnswers({})
-    setLoadingPoll(false)
+    setLoading(false)
   }
 
   const renderQuestions = () => (
@@ -167,7 +163,7 @@ const Poll: FunctionComponent = () => {
   return (
     <div className="poll" id="poll">
       <h2>Encuesta</h2>
-      {loadingPoll ? (
+      {loading ? (
         <Loading />
       ) : showResults ? (
         renderResults()

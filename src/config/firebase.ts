@@ -26,3 +26,4 @@ firebase
 
 export const db = fb.firestore()
 export const firestore = firebase.firestore
+export const firebaseI = firebase

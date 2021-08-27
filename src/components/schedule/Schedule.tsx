@@ -6,11 +6,11 @@ import './Schedule.scss'
 
 const Schedule: FunctionComponent = () => {
   const [activities, setActivities] = useState([] as Activity[])
-  const [loadingSchedule, setLoadingSchedule] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    setLoadingSchedule(true)
     const queryActivities: Activity[] = []
+
     db.collection('activity').onSnapshot(
       (activitySnapshot) => {
         activitySnapshot.forEach((activity) => {
@@ -29,18 +29,18 @@ const Schedule: FunctionComponent = () => {
   }, [])
 
   useEffect(() => {
-    setLoadingSchedule(activities.length == 0)
+    setLoading(activities.length == 0)
   }, [activities])
 
   return (
     <div className="schedule" id="shcedule">
       <h2>Yamile & Julian</h2>
-      {loadingSchedule ? (
+      {loading ? (
         <Loading color="white" />
       ) : (
         <>
-          <p className="location">Diciembre 19, 2020</p>
-          <p>Hacienda La Vicotoria. Subachoque, Cundinamarca</p>
+          <p className="location">Diciembre 19 del 2021</p>
+          <p>Hacienda La Victoria. Subachoque, Cundinamarca</p>
           <div className="activities">
             {activities.map((activity) => (
               <div className="activity" key={activity.id}>

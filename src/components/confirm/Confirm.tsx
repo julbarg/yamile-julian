@@ -24,11 +24,10 @@ const Confirm = () => {
   const [filteredGuest, setFilteredGuest] = useState([] as IPersonResult[])
   const [membersOfFamily, setMembersOfFamily] = useState([] as Guest[])
   const [showAccommodation, setShowAccommodation] = useState(false)
-  const [showResult, setShowResult] = useState(false)
+  const [showResult, setShowResult] = useState(true)
   const db = useContext(DBContext)
 
   const getConfirmResponse = async () => {
-    setLoading(true)
     const confirmRef = db.collection('confirm')
     const activeRef = await confirmRef.get()
     const queryConfirm: ConfirmResponse[] = []

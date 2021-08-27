@@ -6,16 +6,13 @@ import './Faq.scss'
 
 const Faq: FunctionComponent = () => {
   const [faqs, setFaqs] = useState([] as FAQResponse[])
-  const [loadingFaq, setLoadingFaq] = useState(false)
+  const [loadingFaq, setLoadingFaq] = useState(true)
 
   const getFaqs = () => {
     const queryFaqs: FAQResponse[] = []
-    setLoadingFaq(true)
     db.collection('faq').onSnapshot(
       (faqSnapshot) => {
         faqSnapshot.forEach((faq) => {
-          console.log(faq.data())
-
           queryFaqs.push({
             ...faq.data(),
             id: faq.id,
@@ -35,7 +32,7 @@ const Faq: FunctionComponent = () => {
   }, [])
 
   useEffect(() => {
-    setLoadingFaq(false)
+    setLoadingFaq(faqs.length == 0)
   }, [faqs])
 
   const iframe = (iframeHtml: string) => {
@@ -56,7 +53,10 @@ const Faq: FunctionComponent = () => {
               <h3>{faq.question}</h3>
               {faq.image ? <img src={faq.image} alt={faq.question} /> : null}
               {faq.iframe ? (
-                <div dangerouslySetInnerHTML={iframe(faq.iframe)} />
+                <div
+                  className="iframe-container"
+                  dangerouslySetInnerHTML={iframe(faq.iframe)}
+                />
               ) : null}
               {faq.answer ? <p>{faq.answer}</p> : null}
             </div>

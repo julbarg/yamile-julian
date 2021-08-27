@@ -11,8 +11,8 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
 
   const links: LinkRef[] = [
     { id: 'home', route: '/', name: 'Inicio' },
-    { id: 'confirm', route: '/confirm', name: 'Confirmar Asistencia' },
-    { id: 'faq', route: '/#faq', name: 'Preguntas Frecuentes' },
+    { id: 'confirm', route: '/confirm', name: 'Confirmar asistencia' },
+    { id: 'faq', route: '/#faq', name: 'Preguntas frecuentes' },
     { id: 'shcedule', route: '/#shcedule', name: 'Cronograma' },
     { id: 'poll', route: '/#poll', name: 'Encuesta' },
   ]

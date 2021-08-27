@@ -1,32 +1,56 @@
-import React, { FunctionComponent, StrictMode } from 'react'
+import React, {
+  FunctionComponent,
+  StrictMode,
+  useEffect,
+  useState,
+} from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NotFound from './components/notFound/NotFound'
-import { db } from './config/firebase'
+import { db, firebaseI } from './config/firebase'
 import './config/firebase'
 import ConfirmPage from './views/ConfirmationPage/ConfirmPage'
 import HomePage from './views/HomePage/HomePage'
+import Loading from './components/loading/Loading'
 
 export const DBContext = React.createContext(db)
 
 const App: FunctionComponent = () => {
+  const [loading, setLoading] = useState(true)
+  const singIn = async () => {
+    await firebaseI
+      .auth()
+      .signInWithEmailAndPassword(
+        process.env.FIREBASE_EMAIL || '',
+        process.env.FIREBASE_PASS || ''
+      )
+    setLoading(false)
+  }
+  useEffect(() => {
+    singIn()
+  }, [])
+
   return (
     <div className="app">
-      <DBContext.Provider value={db}>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route path="/confirm">
-              <ConfirmPage />
-            </Route>
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
-        </Router>
-      </DBContext.Provider>
+      {loading ? (
+        <Loading />
+      ) : (
+        <DBContext.Provider value={db}>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route path="/confirm">
+                <ConfirmPage />
+              </Route>
+              <Route>
+                <NotFound />
+              </Route>
+            </Switch>
+          </Router>
+        </DBContext.Provider>
+      )}
     </div>
   )
 }
