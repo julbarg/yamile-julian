@@ -1,0 +1,107 @@
+div.message {
+  padding: 1rem;
+  color: #3f4551;
+  min-height: 100vh;
+
+  h2 {
+    padding-top: 1.5rem;
+    line-height: 1;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  label {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding-top: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    margin: 0.5rem 0;
+    display: block;
+  }
+
+  input {
+    height: 2rem;
+  }
+
+  textarea {
+    padding-top: 0.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-family: 'Oswald', sans-serif;
+    background-color: rgba($color: #3f4551, $alpha: 0.9);
+    color: rgba($color: #fff, $alpha: 0.8);
+    font-size: 1rem;
+    width: 100%;
+    height: 2rem;
+    margin: 0.8rem 0;
+
+    &:hover {
+      color: rgba($color: #fff, $alpha: 0.9);
+      background-color: rgba($color: #3f4551, $alpha: 0.9);
+    }
+
+    &:active {
+      color: rgba($color: #fff, $alpha: 1);
+      background-color: rgba($color: #3f4551, $alpha: 1);
+    }
+
+    &:disabled {
+      background-color: #cccccc;
+      color: #666666;
+    }
+  }
+
+  .box-shadow {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+      0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+      0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+      0 100px 80px rgba(0, 0, 0, 0.12);
+  }
+
+  div.result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+
+    &-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 769px) {
+    margin-top: 3rem;
+    padding: 2rem;
+
+    h2 {
+      padding-top: 1rem;
+    }
+
+    &-container {
+      width: 75%;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+  }
+}

@@ -17,6 +17,7 @@ export const DBContext = React.createContext(db)
 
 const HomePage = lazy(() => import('./views/HomePage/HomePage'))
 const ConfirmPage = lazy(() => import('./views/ConfirmationPage/ConfirmPage'))
+const MessagePage = lazy(() => import('./views/MessagePage/MessagePage'))
 
 const App: FunctionComponent = () => {
   const [loading, setLoading] = useState(true)
@@ -47,6 +48,9 @@ const App: FunctionComponent = () => {
                 </Route>
                 <Route path="/confirm">
                   <ConfirmPage />
+                </Route>
+                <Route path="/message">
+                  <MessagePage />
                 </Route>
                 <Route>
                   <NotFound />
