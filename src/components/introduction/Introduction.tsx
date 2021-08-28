@@ -45,7 +45,7 @@ const Introduction = () => {
             ))}
             <div className="container-button">
               <Link className="logo" to="/message">
-                <button>Dejanos un mensake</button>
+                <button>Dejanos un mensaje</button>
               </Link>
             </div>
           </>
