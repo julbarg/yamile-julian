@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../../config/firebase'
 import { IntroductionResponse } from '../../types/Types'
 import Loading from '../loading/Loading'
+import { NavHashLink as Link } from 'react-router-hash-link'
 import './Introduction.scss'
 
 const Introduction = () => {
@@ -42,6 +43,11 @@ const Introduction = () => {
             {introduction.content?.map((item, index) => (
               <p key={`content-${index}`}>{item}</p>
             ))}
+            <div className="container-button">
+              <Link className="logo" to="/message">
+                <button>Dejanos un mensake</button>
+              </Link>
+            </div>
           </>
         )}
       </div>

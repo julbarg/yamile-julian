@@ -14,11 +14,16 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
   const [daysLeft, setDaysLeft] = useState(0)
 
   const links: LinkRef[] = [
-    { id: 'home', route: '/', name: 'Inicio' },
-    { id: 'confirm', route: '/confirm', name: 'Confirmar asistencia' },
+    { id: 'home', route: '/#top', name: 'Inicio' },
+    {
+      id: 'confirm',
+      route: '/confirm#confirm-page',
+      name: 'Confirmar asistencia',
+    },
     { id: 'faq', route: '/#faq', name: 'Preguntas frecuentes' },
     { id: 'shcedule', route: '/#shcedule', name: 'Cronograma' },
     { id: 'poll', route: '/#poll', name: 'Encuesta' },
+    { id: 'message', route: '/message#message-page', name: 'Mensajes' },
   ]
 
   useEffect(() => {
