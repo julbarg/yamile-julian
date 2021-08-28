@@ -1,0 +1,55 @@
+.introduction {
+  background-color: #3f4551;
+  background-image: url(../../img/introduction-bg3.jpeg);
+
+  background-position-x: center;
+  background-size: 200px;
+  padding: 1rem;
+
+  h2,
+  p {
+    color: rgba($color: #fff, $alpha: 0.8);
+  }
+
+  p {
+    text-align: justify;
+    font-size: 1rem;
+  }
+
+  div.introduction-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+
+  div.image-container {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 150px;
+    }
+  }
+
+  @media (min-width: 769px) {
+    padding: 2rem;
+    background-size: 400px;
+    background-attachment: fixed;
+
+    p {
+      text-align: justify;
+      font-size: 1.3rem;
+    }
+
+    div.introduction-container {
+      width: 65%;
+      margin: 0 auto;
+    }
+
+    div.image-container {
+      img {
+        width: 256px;
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ import './Faq.scss'
 
 const Faq: FunctionComponent = () => {
   const [faqs, setFaqs] = useState([] as FAQResponse[])
-  const [loadingFaq, setLoadingFaq] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   const getFaqs = () => {
     const queryFaqs: FAQResponse[] = []
@@ -20,6 +20,7 @@ const Faq: FunctionComponent = () => {
         })
 
         setFaqs(queryFaqs)
+        setLoading(false)
       },
       (error) => {
         console.error(error)
@@ -31,10 +32,6 @@ const Faq: FunctionComponent = () => {
     getFaqs()
   }, [])
 
-  useEffect(() => {
-    setLoadingFaq(faqs.length == 0)
-  }, [faqs])
-
   const iframe = (iframeHtml: string) => {
     return {
       __html: iframeHtml,
@@ -44,7 +41,7 @@ const Faq: FunctionComponent = () => {
   return (
     <div className="faqs" id="faq">
       <h2>Preguntas frecuentes</h2>
-      {loadingFaq ? (
+      {loading ? (
         <Loading />
       ) : (
         <div className="faqs-container">

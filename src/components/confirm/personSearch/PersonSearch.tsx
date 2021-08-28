@@ -12,12 +12,16 @@ const PersonSearch: FunctionComponent<{
 }> = ({ onSubmit }) => {
   const [name, setName] = useState('')
   const inputEl: MutableRefObject<HTMLInputElement | null> = useRef(null)
+  const [showNameInputMessage, setShowNameInputMessage] = useState(true)
 
   useEffect(() => {
     if (inputEl) {
       inputEl.current?.focus()
     }
   }, [])
+
+  // eslint-disable-next-line no-unused-vars
+  const isLengthValid: (txt: string) => boolean = (txt) => txt.length >= 3
 
   return (
     <div className="step">
@@ -32,17 +36,30 @@ const PersonSearch: FunctionComponent<{
           className="actions"
           onSubmit={(e) => {
             e.preventDefault()
-            onSubmit(name)
+            if (isLengthValid(name)) {
+              onSubmit(name)
+            }
           }}
         >
           <input
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setShowNameInputMessage(!isLengthValid(e.target.value))
+              setName(e.target.value)
+            }}
             className="box-shadow"
             type="text"
             ref={inputEl}
+            minLength={3}
           />
-          <button className="box-shadow">Buscar</button>
+          <button className="box-shadow" disabled={showNameInputMessage}>
+            Buscar
+          </button>
+          <span
+            className={`input-message ${!showNameInputMessage ? 'valid' : ''}`}
+          >
+            {showNameInputMessage ? 'Al menos 3 caracteres' : 'Valido'}
+          </span>
         </form>
       </div>
     </div>

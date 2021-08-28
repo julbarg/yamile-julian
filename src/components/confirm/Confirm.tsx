@@ -179,7 +179,7 @@ const Confirm = () => {
 
   return (
     <div className="confirm">
-      <h2>Confirmar Asistencia</h2>
+      <h2>¿Nos acompañas o te lo pierdes?</h2>
       {}
       {loading ? (
         <Loading />

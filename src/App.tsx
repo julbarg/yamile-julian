@@ -39,7 +39,7 @@ const App: FunctionComponent = () => {
         <Loading />
       ) : (
         <DBContext.Provider value={db}>
-          <Suspense fallback={Loading}>
+          <Suspense fallback={<Loading />}>
             <Router>
               <Switch>
                 <Route exact path="/">

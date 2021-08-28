@@ -73,3 +73,9 @@ export interface ConfirmedGuest {
     wantsAccommodation?: boolean
   }
 }
+
+export interface IntroductionResponse {
+  title?: string
+  image?: string
+  content?: string[]
+}
