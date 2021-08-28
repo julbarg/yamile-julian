@@ -3,6 +3,7 @@ import { db } from '../../config/firebase'
 import { FAQResponse } from '../../types/Types'
 import Loading from '../loading/Loading'
 import './Faq.scss'
+import WhatsApp from '@material-ui/icons/WhatsApp'
 
 const Faq: FunctionComponent = () => {
   const [faqs, setFaqs] = useState([] as FAQResponse[])
@@ -60,6 +61,22 @@ const Faq: FunctionComponent = () => {
           ))}
         </div>
       )}
+      <div className="container-button">
+        <a
+          href="https://wa.me/573123089218"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <button className="button-whatsapp">
+            <WhatsApp className="whatsapp" />
+            WhatsApp
+          </button>
+        </a>
+        <div>
+          Si tienes alguna pregunta que no resolvimos, no dudes en contactarnos
+          via WhatsApp
+        </div>
+      </div>
     </div>
   )
 }

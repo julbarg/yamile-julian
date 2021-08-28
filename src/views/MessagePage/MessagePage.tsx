@@ -6,7 +6,7 @@ import './MessagePage.scss'
 
 const MessagePage = () => {
   return (
-    <div className="message-page" id="messa-page">
+    <div className="message-page" id="message-page">
       <Header isMain={false} />
       <Message />
       <Footer />

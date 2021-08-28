@@ -43,9 +43,7 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
   const desktopRender = () => (
     <div className="line-menu-container">
       <LineMenu isMain={isMain} links={links.slice(1, 3)} />
-      <Link className="logo" to="/">
-        {renderCountDown()}
-      </Link>
+      <div className="logo">{renderCountDown()}</div>
       <LineMenu isMain={isMain} links={links.slice(3, 5)} />
     </div>
   )
