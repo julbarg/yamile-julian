@@ -105,6 +105,8 @@ header {
   }
 
   @media only screen and (orientation: landscape) and (max-width: 769px) {
+    height: auto;
+    padding-bottom: 1rem;
     div.header {
       padding-top: 0;
     }

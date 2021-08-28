@@ -6,7 +6,7 @@ div.confirm {
   div.confirm-container {
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   button {
@@ -35,6 +35,10 @@ div.confirm {
   h2 {
     padding-top: 1.5rem;
     line-height: 1;
+  }
+
+  h3 {
+    text-align: center;
   }
 
   .step {
@@ -141,7 +145,7 @@ div.confirm {
 
       .secondary {
         background-color: rgba($color: #fff, $alpha: 0.8);
-        margin-left: 2rem;
+        margin-left: 1.5rem;
         padding: 0.5rem 1rem;
 
         input {
@@ -165,9 +169,16 @@ div.confirm {
       font-size: 1.5rem;
     }
 
+    .task {
+      .secondary {
+        margin-left: 2rem;
+      }
+    }
+
     div.confirm-container {
       width: 75%;
       margin: 0 auto;
+      padding: 0 2rem;
     }
 
     .step {

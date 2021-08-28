@@ -64,6 +64,9 @@ const PersonConfirm: FunctionComponent<{
     let tmpConfirmedMembersOfFamily = { ...confirmedMembersOfFamily }
     for (const key in tmpConfirmedMembersOfFamily) {
       tmpConfirmedMembersOfFamily[key].confirm = checked
+      if (!checked) {
+        tmpConfirmedMembersOfFamily[key].wantsAccommodation = checked
+      }
     }
     setConfirmedMembersOfFamily(tmpConfirmedMembersOfFamily)
   }
