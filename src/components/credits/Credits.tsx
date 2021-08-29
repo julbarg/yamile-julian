@@ -1,73 +1,68 @@
 import React from 'react'
 import './Credits.scss'
-import { useState } from 'react'
-import { CreditResponse } from '../../types/Types'
-import { db } from '../../config/firebase'
-import { useEffect } from 'react'
-import Loading from '../loading/Loading'
-import Instagram from '@material-ui/icons/Instagram'
 
 const Credits = () => {
-  const [credits, setCredits] = useState([] as CreditResponse[])
-  const [loading, setLoading] = useState(true)
-
-  const getCredits = () => {
-    const queryCredits: CreditResponse[] = []
-    db.collection('credit').onSnapshot(
-      (creditSnapshot) => {
-        creditSnapshot.forEach((credit) => {
-          queryCredits.push({
-            id: credit.id,
-            ...credit.data(),
-          })
-        })
-
-        setCredits(queryCredits)
-        setLoading(false)
-      },
-      (error) => {
-        console.log(console.error(error))
-      }
-    )
-  }
-
-  useEffect(() => {
-    getCredits()
-  }, [])
-
-  const renderCredits = () => (
-    <div className="credits-container">
-      {credits.map((credit) => (
-        <div key={credit.id} className="credit">
+  return (
+    <div className="credits">
+      <div className="credits-container">
+        <div className="credit">
           <div className="credit-name">
-            <img src={credit.image} alt="Logo Credit" />
-
-            <h3>{credit.title}</h3>
-            <p className="subtitle">{credit.subtitle}</p>
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fimage%2Flovely-logo.png?alt=media&token=5157f9c7-01be-4030-a5bf-c226fc0ce7b2"
+              alt="Logo Credit"
+            />
           </div>
-
           <div className="credit-content">
-            <p className="content">{credit.content}</p>
             <a
-              href={credit.instagramUrl}
+              href="https://www.instagram.com/lovelyweddingsbodas/"
               rel="noopener noreferrer"
               target="_blank"
             >
               <button className="button-instagram">
-                <Instagram className="whatsapp" />
-                <span>{credit.instagramAccount}</span>
+                <span>@lovelyweddingsbodas</span>
               </button>
             </a>
           </div>
         </div>
-      ))}
-    </div>
-  )
-
-  return (
-    <div className="credits">
-      <h2>Con el apoyo de...</h2>
-      {loading ? <Loading color="white" /> : renderCredits()}
+        <div className="credit">
+          <div className="credit-name">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fimage%2Frocha.jpeg?alt=media&token=68216e8d-42b3-4720-943b-e6c20f9d953c"
+              alt="Logo Credit"
+            />
+          </div>
+          <div className="credit-content">
+            <a
+              href="https://www.instagram.com/rochafotografia/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <button className="button-instagram">
+                <span>@rochafotografia</span>
+              </button>
+            </a>
+          </div>
+        </div>
+        <div className="credit last">
+          <div className="credit-name">
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fimage%2Fpia.jpeg?alt=media&token=7f12d4eb-0ee0-436e-9e1b-a81e5cd072f5"
+              alt="Logo Credit"
+            />
+          </div>
+          <div className="credit-content">
+            <a
+              href="https://www.instagram.com/bodasbogota/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <button className="button-instagram">
+                <span>@bodasbogota</span>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
