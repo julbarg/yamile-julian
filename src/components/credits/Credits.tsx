@@ -14,7 +14,7 @@ const Credits = () => {
           </div>
           <div className="credit-content">
             <a
-              href="https://www.instagram.com/lovelyweddingsbodas/"
+              href="https://www.instagram.com/_u/lovelyweddingsbodas/"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -33,7 +33,7 @@ const Credits = () => {
           </div>
           <div className="credit-content">
             <a
-              href="https://www.instagram.com/rochafotografia/"
+              href="https://www.instagram.com/_u/rochafotografia/"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -52,7 +52,7 @@ const Credits = () => {
           </div>
           <div className="credit-content">
             <a
-              href="https://www.instagram.com/bodasbogota/"
+              href="https://www.instagram.com/_u/bodasbogota/"
               rel="noopener noreferrer"
               target="_blank"
             >
