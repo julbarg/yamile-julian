@@ -1,0 +1,108 @@
+.credits {
+  background-color: #3f4551;
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Fintroduction-bg.jpeg?alt=media&token=4ad7dfd6-0d39-4e7b-b222-c20c73a3b85e);
+
+  background-position-x: center;
+  background-size: 200px;
+  padding: 1rem;
+  color: rgba($color: #fff, $alpha: 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .credit {
+    width: 80vw;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    .credit-header {
+      height: 80vw;
+      img {
+        width: 100%;
+      }
+    }
+
+    .credit-social,
+    .credit-content {
+      background-color: #d5cbbf;
+      padding: 1rem 0;
+    }
+
+    .credit-content {
+      height: 200px;
+    }
+
+    div.credit-social {
+      padding: 0.5rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px rgba($color: #000000, $alpha: 0.3) solid;
+      background-color: #d5cbbfe3;
+
+      span {
+        margin-left: 0.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        line-height: 0;
+        font-size: 1.1rem;
+        background: linear-gradient(
+          45deg,
+          #405de6,
+          #5851db,
+          #833ab4,
+          #c13584,
+          #e1306c,
+          #fd1d1d
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      svg {
+        margin-top: 5px;
+      }
+    }
+
+    a,
+    p,
+    h3 {
+      color: #3f4551;
+      text-align: left;
+    }
+
+    p,
+    h3 {
+      padding: 0 0.5rem;
+      margin: 0 0.5rem;
+    }
+
+    a {
+      display: flex;
+      color: #696969;
+    }
+
+    p.content {
+      margin: 1rem 0.5rem;
+    }
+
+    p.subtitle {
+      color: #6e6e6e;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .credit {
+      width: 30vw;
+      .credit-header {
+        height: 30vw;
+      }
+    }
+
+    .credits-container {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

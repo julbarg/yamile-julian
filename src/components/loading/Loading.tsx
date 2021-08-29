@@ -7,7 +7,9 @@ const Loading: FunctionComponent<{ color?: string }> = ({
 }) => {
   return (
     <div className="loading">
-      <div className="loading-title">Cargando...</div>
+      <div className="loading-title" style={{ color }}>
+        Cargando...
+      </div>
       <ReactLoading type="bars" color={color} width={72} />
     </div>
   )

@@ -6,7 +6,6 @@ const Footer = () => {
   return (
     <footer>
       <div>Diseñado por Julian Barragan</div>
-
       <a
         href="https://www.linkedin.com/in/julian-barragan-b8844ab6/"
         target="_blank"

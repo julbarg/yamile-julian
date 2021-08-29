@@ -33,7 +33,7 @@ const Introduction = () => {
     <div className="introduction">
       <div className="introduction-container">
         {loading ? (
-          <Loading />
+          <Loading color="white" />
         ) : (
           <>
             <h2>{introduction.title}</h2>

@@ -79,3 +79,13 @@ export interface IntroductionResponse {
   image?: string
   content?: string[]
 }
+
+export interface CreditResponse {
+  id: string
+  title?: string
+  subtitle?: string
+  content?: string
+  image?: string
+  instagramAccount?: string
+  instagramUrl?: string
+}

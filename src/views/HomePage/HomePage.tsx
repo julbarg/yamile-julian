@@ -1,3 +1,4 @@
+import Credits from '../../components/credits/Credits'
 import Faq from '../../components/faq/Faq'
 import Introduction from '../../components/introduction/Introduction'
 import Footer from '../../components/layout/footer/Footer'
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Faq />
       <Schedule />
       <Poll />
+      <Credits />
       <Footer />
     </div>
   )
