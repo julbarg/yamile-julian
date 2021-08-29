@@ -5,6 +5,7 @@ import { CreditResponse } from '../../types/Types'
 import { db } from '../../config/firebase'
 import { useEffect } from 'react'
 import Loading from '../loading/Loading'
+import Instagram from '@material-ui/icons/Instagram'
 
 const Credits = () => {
   const [credits, setCredits] = useState([] as CreditResponse[])
@@ -38,29 +39,24 @@ const Credits = () => {
     <div className="credits-container">
       {credits.map((credit) => (
         <div key={credit.id} className="credit">
-          <div className="credit-header">
+          <div className="credit-name">
             <img src={credit.image} alt="Logo Credit" />
-          </div>
-          <div className="credit-content">
-            <a
-              href="https://www.instagram.com/lovelyweddingsbodas/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <h3>{credit.title}</h3>
-            </a>
+
+            <h3>{credit.title}</h3>
             <p className="subtitle">{credit.subtitle}</p>
-            <p className="content">{credit.content}</p>
           </div>
-          <div className="credit-social">
-            <a href={credit.instagramUrl} target="_blank" rel="noreferrer">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Finstagram.png?alt=media&token=7ad6abbe-0b81-4b05-a76e-e5cc4c6ea79a"
-                width={22}
-                height={22}
-                alt=""
-              />
-              <span>{credit.instagramAccount}</span>
+
+          <div className="credit-content">
+            <p className="content">{credit.content}</p>
+            <a
+              href={credit.instagramUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <button className="button-instagram">
+                <Instagram className="whatsapp" />
+                <span>{credit.instagramAccount}</span>
+              </button>
             </a>
           </div>
         </div>
