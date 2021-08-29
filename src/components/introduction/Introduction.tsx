@@ -44,7 +44,7 @@ const Introduction = () => {
               <p key={`content-${index}`}>{item}</p>
             ))}
             <div className="container-button">
-              <Link className="logo" to="/messageconfirm/#confirm-page">
+              <Link className="logo" to="/message">
                 <button>Dejanos un mensaje</button>
               </Link>
             </div>

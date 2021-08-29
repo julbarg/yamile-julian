@@ -21,7 +21,7 @@ const Header: FunctionComponent<{ isMain?: boolean }> = ({ isMain = true }) => {
       name: 'Confirmar asistencia',
     },
     { id: 'faq', route: '/#faq', name: 'Preguntas frecuentes' },
-    { id: 'shcedule', route: '/#shcedule', name: 'Cronograma' },
+    { id: 'schedule', route: '/#schedule', name: 'Cronograma' },
     { id: 'poll', route: '/#poll', name: 'Encuesta' },
     { id: 'message', route: '/message#message-page', name: 'Mensajes' },
   ]

@@ -15,6 +15,14 @@ const HamburgerMenu: FunctionComponent<{
     }
   }
 
+  const scrollWithOffset = (el) => {
+    setTimeout(() => {
+      const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset
+      const yOffset = 0
+      window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' })
+    }, 500)
+  }
+
   return (
     <nav role="navigation">
       <div id="menuToggle">
@@ -34,6 +42,7 @@ const HamburgerMenu: FunctionComponent<{
                 smooth={true}
                 exact
                 onClick={checkToggle}
+                scroll={(el) => scrollWithOffset(el)}
               >
                 {link.name}
               </Link>

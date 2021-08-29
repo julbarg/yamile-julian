@@ -33,7 +33,7 @@ const Schedule: FunctionComponent = () => {
   }, [activities])
 
   return (
-    <div className="schedule" id="shcedule">
+    <div className="schedule" id="schedule">
       <h2>Yamile & Julian</h2>
       {loading ? (
         <Loading color="white" />
