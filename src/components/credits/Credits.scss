@@ -1,6 +1,6 @@
 .credits {
   background-color: rgba(63, 69, 81, 0.8);
-  padding: 1rem;
+  padding: 2rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,8 +17,6 @@
     border-radius: 20px;
     width: 35vw;
     margin: 0 auto;
-    margin-bottom: 2rem;
-
     padding: 1rem 0.5rem;
     display: flex;
     flex-direction: column;
@@ -72,6 +70,7 @@
       color: rgba(63, 69, 81, 0.8);
       display: flex;
       align-items: center;
+      margin: 0.5rem 0;
 
       &:hover {
         background-color: rgba($color: #fff, $alpha: 0.9);
@@ -83,6 +82,10 @@
     }
   }
 
+  .last {
+    padding-bottom: 0;
+  }
+
   @media (min-width: 769px) {
     .credit {
       width: 150px;
@@ -91,6 +94,10 @@
       img {
         width: 100px;
       }
+    }
+
+    .last {
+      padding: 1rem 0.5rem;
     }
 
     .credits-container {
