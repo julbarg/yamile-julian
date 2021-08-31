@@ -50,12 +50,12 @@ header {
   div.countdown {
     width: fit-content;
     margin: 0 auto;
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Anton', sans-serif;
     background-color: rgba($color: #fff, $alpha: 0.8);
     border-radius: 0 0 8px 8px;
     color: #3f4551;
     padding: 0.8rem 1rem;
-    line-height: 0.9;
+    line-height: 1;
     text-align: center;
     &-title {
       font-size: 1.5rem;
@@ -76,12 +76,12 @@ header {
     p {
       font-size: 3rem;
       text-align: center;
-      font-family: 'Bebas Neue', cursive;
+      font-family: 'Anton', sans-serif;
       margin-bottom: 0;
     }
 
     p.town {
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-top: 0;
     }
 
@@ -109,7 +109,7 @@ header {
   }
 
   @media only screen and (orientation: landscape) and (max-width: 769px) {
-    height: auto;
+    height: fit-content;
     padding-bottom: 1rem;
     div.header {
       padding-top: 0;
@@ -123,7 +123,7 @@ header {
   @media (min-width: 769px) {
     div.countdown {
       padding: 1.2rem;
-      line-height: 0.9;
+      line-height: 1;
     }
     div.header {
       padding-top: 7rem;
