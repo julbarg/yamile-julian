@@ -1,8 +1,9 @@
 .introduction {
   background-color: #3f4551;
-  background-image: url(https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Fintroduction-bg.jpeg?alt=media&token=4ad7dfd6-0d39-4e7b-b222-c20c73a3b85e);
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Fintro-bg-mobile.jpeg?alt=media&token=6e1573af-80cc-4a40-88bc-abe304ffaa14);
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position-x: center;
-  background-size: 200px;
   padding: 1rem;
 
   h2,
@@ -59,8 +60,8 @@
 
   @media (min-width: 769px) {
     padding: 2rem;
-    background-size: 400px;
-    background-attachment: fixed;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Fintro-bg.jpeg?alt=media&token=5b732f38-494f-41af-a2d1-c74eb747f067);
+    background-position-y: center;
 
     p {
       font-size: 1.3rem;
