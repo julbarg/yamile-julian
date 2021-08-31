@@ -37,9 +37,6 @@ const Introduction = () => {
         ) : (
           <>
             <h2>{introduction.title}</h2>
-            <div className="image-container">
-              <img src={introduction.image} alt="Wedding" />
-            </div>
             {introduction.content?.map((item, index) => (
               <p key={`content-${index}`}>{item}</p>
             ))}
