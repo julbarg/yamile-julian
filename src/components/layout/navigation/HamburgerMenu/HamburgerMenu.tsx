@@ -15,7 +15,7 @@ const HamburgerMenu: FunctionComponent<{
     }
   }
 
-  const scrollWithOffset = (el) => {
+  const scrollWithOffset = (el: HTMLElement) => {
     setTimeout(() => {
       const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset
       const yOffset = 0

@@ -6,6 +6,14 @@ import { NavHashLink as Link } from 'react-router-hash-link'
 const LineMenu: FunctionComponent<{ links: LinkRef[]; isMain: boolean }> = ({
   links,
 }) => {
+  const scrollWithOffset = (el: HTMLElement) => {
+    setTimeout(() => {
+      const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset
+      const yOffset = 0
+      window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' })
+    }, 500)
+  }
+
   return (
     <nav className="line-menu">
       <ul className="ul-nav">
@@ -17,6 +25,7 @@ const LineMenu: FunctionComponent<{ links: LinkRef[]; isMain: boolean }> = ({
               activeClassName="active"
               smooth={true}
               exact
+              scroll={(el) => scrollWithOffset(el)}
             >
               {link.name}
             </Link>
