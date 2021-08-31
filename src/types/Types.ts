@@ -89,3 +89,11 @@ export interface CreditResponse {
   instagramAccount?: string
   instagramUrl?: string
 }
+
+export interface PlaceResponse {
+  title?: string
+  content?: string[]
+  image?: string
+  instagram?: string
+  id: string
+}
