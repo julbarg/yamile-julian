@@ -35,9 +35,8 @@
   }
 
   div.faqs-container {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
   }
 
   div.iframe-container {
@@ -96,6 +95,8 @@
     }
 
     div.faqs-container {
+      display: flex;
+      flex-wrap: wrap;
       flex-direction: row;
     }
 
