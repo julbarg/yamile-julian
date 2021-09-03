@@ -50,7 +50,7 @@ const Credits = () => {
                   target="_blank"
                 >
                   <button className="button-instagram">
-                    <span>${credit.instagramAccount}</span>
+                    <span>{credit.instagramAccount}</span>
                   </button>
                 </a>
               </div>
