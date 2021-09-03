@@ -5,7 +5,7 @@ export interface LinkRef {
 }
 
 export interface FAQResponse {
-  answer?: string
+  answer?: string | string[]
   question?: string
   image?: string
   iframe?: string
@@ -82,9 +82,6 @@ export interface IntroductionResponse {
 
 export interface CreditResponse {
   id: string
-  title?: string
-  subtitle?: string
-  content?: string
   image?: string
   instagramAccount?: string
   instagramUrl?: string

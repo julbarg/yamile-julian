@@ -27,6 +27,12 @@ button {
   font-family: 'Montserrat', sans-serif;
 }
 
+a,
+a:hover,
+a:visited {
+  color: #3f4551;
+}
+
 h2,
 h3 {
   font-family: 'Anton', sans-serif;

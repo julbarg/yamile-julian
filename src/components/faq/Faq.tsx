@@ -4,6 +4,7 @@ import { FAQResponse } from '../../types/Types'
 import Loading from '../loading/Loading'
 import './Faq.scss'
 import WhatsApp from '@material-ui/icons/WhatsApp'
+import { htmlContent } from '../../util/HtmlUtil'
 
 const Faq: FunctionComponent = () => {
   const [faqs, setFaqs] = useState([] as FAQResponse[])
@@ -39,6 +40,15 @@ const Faq: FunctionComponent = () => {
     }
   }
 
+  const renderParagrap = (paragraph: string | string[], id: string) => {
+    if (Array.isArray(paragraph)) {
+      return paragraph.map((pg, index) => (
+        <p key={`${index} - ${id}`} dangerouslySetInnerHTML={htmlContent(pg)} />
+      ))
+    }
+    return <p key={id} dangerouslySetInnerHTML={htmlContent(paragraph)} />
+  }
+
   return (
     <div className="faqs" id="faq">
       <h2>Preguntas frecuentes</h2>
@@ -56,7 +66,7 @@ const Faq: FunctionComponent = () => {
                   dangerouslySetInnerHTML={iframe(faq.iframe)}
                 />
               ) : null}
-              {faq.answer ? <p>{faq.answer}</p> : null}
+              {faq.answer ? <>{renderParagrap(faq.answer, faq.id)}</> : null}
             </div>
           ))}
         </div>

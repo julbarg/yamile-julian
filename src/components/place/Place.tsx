@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
 import { db } from '../../config/firebase'
 import { PlaceResponse } from '../../types/Types'
+import { htmlContent } from '../../util/HtmlUtil'
 import Loading from '../loading/Loading'
 import './Place.scss'
 
@@ -23,12 +24,6 @@ const Place: FunctionComponent = () => {
           console.error(error)
         }
       )
-  }
-
-  const htmlContent = (html: string) => {
-    return {
-      __html: html,
-    }
   }
 
   useEffect(() => {
