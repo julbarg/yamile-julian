@@ -127,6 +127,7 @@ const Confirm = () => {
     setLoading(true)
     for (const key in confirmedMembersOfFamily) {
       const guest = confirmedMembersOfFamily[key]
+      const wantsAccommodation = guest.wantsAccommodation || false
       await db
         .collection('confirm')
         .doc(guest.idFamily)
@@ -134,7 +135,7 @@ const Confirm = () => {
         .doc(key)
         .update({
           confirm: guest.confirm,
-          wantsAccommodation: guest.confirm && guest.wantsAccommodation,
+          wantsAccommodation: guest.confirm && wantsAccommodation,
         })
     }
     getConfirmResponse()

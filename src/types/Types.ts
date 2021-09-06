@@ -39,7 +39,6 @@ export interface Answers {
 
 export interface ConfirmResponse {
   id: string
-  mainPerson?: string
   showAccommodation?: boolean
   family?: Person[]
 }

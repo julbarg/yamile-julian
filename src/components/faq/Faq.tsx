@@ -84,7 +84,7 @@ const Faq: FunctionComponent = () => {
         </a>
         <div>
           Si tienes alguna pregunta que no resolvimos, no dudes en contactarnos
-          via WhatsApp
+          vía WhatsApp
         </div>
       </div>
     </div>
