@@ -138,7 +138,11 @@ const PersonConfirm: FunctionComponent<{
                   type="checkbox"
                   id={guest.id}
                   value={guest.id}
-                  checked={confirmedMembersOfFamily[guest.id].confirm}
+                  checked={
+                    confirmedMembersOfFamily[guest.id]
+                      ? confirmedMembersOfFamily[guest.id].confirm
+                      : false
+                  }
                   onChange={(e) => addOrRemoveConfirmedGuest(e, guest.id)}
                 />
                 <label htmlFor={guest.id}>{guest.name}</label>
@@ -153,7 +157,9 @@ const PersonConfirm: FunctionComponent<{
                     id={`yes-${guest.id}`}
                     value="yes"
                     checked={
-                      confirmedMembersOfFamily[guest.id].wantsAccommodation
+                      confirmedMembersOfFamily[guest.id]
+                        ? confirmedMembersOfFamily[guest.id].wantsAccommodation
+                        : false
                     }
                     onChange={() => addOrRemoveAccomodation(true, guest.id)}
                   />
