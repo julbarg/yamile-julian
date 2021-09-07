@@ -13,7 +13,7 @@ const PersonResults: FunctionComponent<{
         <div className="box number">2.</div>
         <div className="box title">Selecciona tu nombre</div>
         <div className="box task">
-          <div>
+          <div className="box description">
             Selecciona tu nombre de la lista dando clic al boton{' '}
             <strong>Seleccionar</strong> al lado del nombre que te corresponda
           </div>

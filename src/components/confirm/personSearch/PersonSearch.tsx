@@ -28,7 +28,7 @@ const PersonSearch: FunctionComponent<{
       <div className="box number">{'1.'}</div>
       <div className="box title">Busca tu nombre</div>
       <div className="box task">
-        <div>
+        <div className="box description">
           Busca tu nombre usando el campo de texto y luego da clic en el boton{' '}
           <strong>Buscar</strong>
         </div>
@@ -58,7 +58,7 @@ const PersonSearch: FunctionComponent<{
           <span
             className={`input-message ${!showNameInputMessage ? 'valid' : ''}`}
           >
-            {showNameInputMessage ? 'Al menos 3 caracteres' : 'Valido'}
+            {showNameInputMessage ? 'Al menos tres (3) caracteres' : 'Valido'}
           </span>
         </form>
       </div>

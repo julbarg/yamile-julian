@@ -102,7 +102,7 @@ const PersonConfirm: FunctionComponent<{
       <div className="box number">3.</div>
       <div className="box title">Confirma Asistencia</div>
       <div className="box task">
-        <div>
+        <div className="box description">
           Selecciona las personas de tu nucleo familiar que van a asisitir y da
           clic en el boton <strong>Confirmar</strong>
         </div>
@@ -116,7 +116,7 @@ const PersonConfirm: FunctionComponent<{
                 checked={isAllSelected}
                 onChange={(e) => confirmAll(e)}
               />
-              <label htmlFor="all-checked">Confirmar Todos</label>
+              <label htmlFor="all-checked">Confirmar todos</label>
             </div>
             {showAccommodation && isAllSelected ? (
               <div className="secondary box-shadow accommodation-all">
@@ -127,7 +127,7 @@ const PersonConfirm: FunctionComponent<{
                   onChange={(e) => confirmAllAccommodation(e)}
                   checked={isAllSelectedWithAccommodation}
                 />
-                <label htmlFor="all-accommodation">Todos con Hospedaje</label>
+                <label htmlFor="all-accommodation">Todos con hospedaje</label>
               </div>
             ) : null}
           </li>
