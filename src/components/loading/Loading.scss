@@ -5,8 +5,14 @@ div.loading {
   flex-direction: column;
   padding: 2rem 0;
 
+  &-subtitle,
   &-title {
     font-size: 1.5rem;
     font-family: 'Anton', sans-serif;
+    text-align: center;
+  }
+
+  &-subtitle {
+    font-size: 1rem;
   }
 }

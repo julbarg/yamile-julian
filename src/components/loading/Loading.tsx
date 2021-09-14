@@ -10,6 +10,10 @@ const Loading: FunctionComponent<{ color?: string }> = ({
       <div className="loading-title" style={{ color }}>
         Cargando...
       </div>
+      <div className="loading-subtitle" style={{ color }}>
+        Esto puede tomar un tiempo, por favor espera un poco
+      </div>
+
       <ReactLoading type="bars" color={color} width={72} />
     </div>
   )

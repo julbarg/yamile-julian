@@ -1,0 +1,31 @@
+.confirmed-list-page {
+  width: 100%;
+  background-color: #d5cbbf;
+  background-image: url(https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Fconfirm-bg-mobile.jpeg?alt=media&token=8a3e7b29-b1f4-4ef4-be59-d92540d7fa98);
+  background-size: cover;
+  background-position-x: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  div.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+
+    &-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 769px) {
+    background-position-x: right;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/yamile-julian.appspot.com/o/yamile-julian%2Fassets%2Fconfirm-bg.jpeg?alt=media&token=cb0e70f3-7892-4062-bf94-d5d8ace33954);
+  }
+
+  @media (min-width: 1280px) {
+    width: 1280px;
+    background-position-x: left;
+  }
+}

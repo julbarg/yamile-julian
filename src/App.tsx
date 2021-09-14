@@ -12,6 +12,7 @@ import NotFound from './components/notFound/NotFound'
 import { db, firebaseI } from './config/firebase'
 import './config/firebase'
 import Loading from './components/loading/Loading'
+import ConfirmedListPage from './views/ConfimedListPage/ConfirmedListPage'
 
 export const DBContext = React.createContext(db)
 
@@ -51,6 +52,9 @@ const App: FunctionComponent = () => {
                 </Route>
                 <Route path="/message">
                   <MessagePage />
+                </Route>
+                <Route exact path="/confirmed-list/AVJxOYvgfva">
+                  <ConfirmedListPage />
                 </Route>
                 <Route>
                   <NotFound />
