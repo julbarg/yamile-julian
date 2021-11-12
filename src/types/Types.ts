@@ -74,6 +74,7 @@ export interface ConfirmedGuest {
 }
 
 export interface IntroductionResponse {
+  id?: string
   title?: string
   image?: string
   content?: string[]

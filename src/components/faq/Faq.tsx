@@ -1,38 +1,41 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
+import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import { FAQResponse } from '../../types/Types'
 import Loading from '../loading/Loading'
-import './Faq.scss'
+import { useAuth } from '../../context/AuthContext'
 import WhatsApp from '@material-ui/icons/WhatsApp'
 import { htmlContent } from '../../util/HtmlUtil'
+import './Faq.scss'
+
 
 const Faq: FunctionComponent = () => {
+  const { user } = useAuth()
   const [faqs, setFaqs] = useState([] as FAQResponse[])
   const [loading, setLoading] = useState(true)
 
-  const getFaqs = () => {
-    const queryFaqs: FAQResponse[] = []
-    db.collection('faq').onSnapshot(
-      (faqSnapshot) => {
-        faqSnapshot.forEach((faq) => {
-          queryFaqs.push({
-            ...faq.data(),
-            id: faq.id,
-          })
-        })
+  const getFaqs = async () => {
+    try {
+      const queryFaqs: FAQResponse[] = []
+      const querySnapshot = await getDocs(collection(db, 'faq'))
 
-        setFaqs(queryFaqs)
-        setLoading(false)
-      },
-      (error) => {
-        console.error(error)
-      }
-    )
+      querySnapshot.forEach((faq) => {
+        queryFaqs.push({
+          ...faq.data(),
+          id: faq.id,
+        })
+      })
+      setFaqs(queryFaqs)
+    } catch (error) {
+      console.log("🚀 ~ getFaqs ~ error:", error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
-    getFaqs()
-  }, [])
+    user && getFaqs()
+  }, [user])
 
   const iframe = (iframeHtml: string) => {
     return {

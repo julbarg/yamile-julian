@@ -1,36 +1,39 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
+import { collection, getDocs } from 'firebase/firestore'
+
 import { db } from '../../config/firebase'
 import { Activity } from '../../types/Types'
 import Loading from '../loading/Loading'
+import { useAuth } from '../../context/AuthContext'
 import './Schedule.scss'
 
 const Schedule: FunctionComponent = () => {
+  const { user } = useAuth()
   const [activities, setActivities] = useState([] as Activity[])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const queryActivities: Activity[] = []
+  const getSchedule = async () => {
+    try {
+      const queryActivities: Activity[] = []
+      const querySnapshot = await getDocs(collection(db, 'activity'))
 
-    db.collection('activity').onSnapshot(
-      (activitySnapshot) => {
-        activitySnapshot.forEach((activity) => {
-          queryActivities.push({
-            ...activity.data(),
+      querySnapshot.forEach((activity) => {
+        queryActivities.push({
+          ...activity.data(),
             id: activity.id,
-          })
         })
-
-        setActivities(queryActivities)
-      },
-      (error) => {
-        console.error(error)
-      }
-    )
-  }, [])
+      })
+      setActivities(queryActivities)
+    } catch (error) {
+      console.log('🚀 ~ getFaqs ~ error:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    setLoading(activities.length == 0)
-  }, [activities])
+    user && getSchedule()
+  }, [user])
 
   return (
     <div className="schedule" id="schedule">

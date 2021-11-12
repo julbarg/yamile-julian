@@ -1,36 +1,38 @@
 import React, { useEffect, useState } from 'react'
+import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import { CreditResponse } from '../../types/Types'
 import Loading from '../loading/Loading'
+import { useAuth } from '../../context/AuthContext'
 import './Credits.scss'
 
 const Credits = () => {
+  const { user } = useAuth()
   const [credits, setCredits] = useState([] as CreditResponse[])
   const [loading, setLoading] = useState(true)
 
-  const getCredits = () => {
-    const queryCredits: CreditResponse[] = []
-    db.collection('credit').onSnapshot(
-      (creditSnapshot) => {
-        creditSnapshot.forEach((credit) => {
-          queryCredits.push({
-            ...credit.data(),
-            id: credit.id,
-          })
-        })
+  const getCredits = async () => {
+    try {
+      const queryCredits: CreditResponse[] = []
+      const querySnapshot = await getDocs(collection(db, 'credit'))
 
-        setCredits(queryCredits)
-        setLoading(false)
-      },
-      (error) => {
-        console.error(error)
-      }
-    )
+      querySnapshot.forEach((credit) => {
+        queryCredits.push({
+          ...credit.data(),
+            id: credit.id,
+        })
+      })
+      setCredits(queryCredits)
+    } catch (error) {
+      console.log("🚀 ~ getCredits ~ error:", error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
-    getCredits()
-  }, [])
+    user && getCredits()
+  }, [user])
 
   return (
     <div className="credits">

@@ -5,6 +5,7 @@ import React, {
   FunctionComponent,
   useContext,
 } from 'react'
+import { addDoc, collection } from 'firebase/firestore'
 import { useRef } from 'react'
 import { DBContext } from '../../App'
 import Loading from '../loading/Loading'
@@ -32,18 +33,19 @@ const Message: FunctionComponent = () => {
 
   const onSubmit = async () => {
     setLoading(true)
-    db.collection('message')
-      .add({
+    try {
+      await addDoc(collection(db, 'message'), {
         name,
         message,
       })
-      .then(() => {
-        setLoading(false)
-        setShowResult(true)
-      })
-      .catch((error) => {
-        console.error('Error adding document: ', error)
-      })
+      setLoading(false)
+      setShowResult(true)
+    } catch (error) {
+      console.error('Error adding document: ', error)
+      setLoading(false)
+    }
+
+    setLoading(true)
   }
 
   const reset = () => {

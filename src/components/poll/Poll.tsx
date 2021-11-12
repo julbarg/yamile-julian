@@ -5,8 +5,9 @@ import React, {
   useEffect,
   useContext,
 } from 'react'
-import { Answers, OptionByQuestion, Question } from '../../types/Types'
-import { firestore } from '../../config/firebase'
+import { collection, doc, getDocs, increment, updateDoc } from 'firebase/firestore'
+
+import { Answers, Question } from '../../types/Types'
 import './Poll.scss'
 
 import { DBContext } from '../../App'
@@ -20,28 +21,31 @@ const Poll: FunctionComponent = () => {
   const db = useContext(DBContext)
 
   const getQuestion = async () => {
-    const pollRef = db.collection('poll')
-    const activeRef = await pollRef.get()
-    const queryQuestions: Question[] = []
+    try {
+      const queryQuestions: Question[] = []
+      const pollRef = collection(db, 'poll')
+      const pollSnapshot = await getDocs(pollRef)
 
-    for (const poll of activeRef.docs) {
-      const optionRef = await pollRef.doc(poll.id).collection('options').get()
-      const queryOptions: OptionByQuestion[] = []
-      for (const option of optionRef.docs) {
-        queryOptions.push({
-          id: option.id,
-          ...option.data(),
-        })
+      for (const pollDoc of pollSnapshot.docs) {
+        const questionData = pollDoc.data() as Question
+        questionData.id = pollDoc.id
+
+        const optionsRef = collection(db, `poll/${pollDoc.id}/options`)
+        const optionsSnapshot = await getDocs(optionsRef)
+        questionData.options = optionsSnapshot.docs.map(optionDoc => ({
+          ...optionDoc.data(),
+          id: optionDoc.id
+        }))
+
+        queryQuestions.push(questionData)
       }
 
-      queryQuestions.push({
-        id: poll.id,
-        options: queryOptions,
-        ...poll.data(),
-      })
+      setQuestions(queryQuestions)
+    } catch (error) {
+      console.log('🚀 ~ getFaqs ~ error:', error)
+    } finally {
+      setLoading(false)
     }
-    setQuestions(queryQuestions)
-    setLoading(false)
   }
 
   useEffect(() => {
@@ -54,21 +58,14 @@ const Poll: FunctionComponent = () => {
 
   const sendPoll = async () => {
     setLoading(true)
-    const increment = firestore.FieldValue.increment(1)
-
     for (const pollId in answers) {
-      await db.collection('poll').doc(pollId).update({
-        totalVotes: increment,
+      await updateDoc(doc(db, 'poll', pollId), {
+        totalVotes: increment(1),
       })
 
-      await db
-        .collection('poll')
-        .doc(pollId)
-        .collection('options')
-        .doc(answers[pollId])
-        .update({
-          numberVotes: increment,
-        })
+      await updateDoc(doc(db, `poll/${pollId}/options`, answers[pollId]), {
+        numberVotes: increment(1),
+      })
     }
     await getQuestion()
     setShowResults(true)

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { collection, query, getDocs, limit } from 'firebase/firestore'
 import { db } from '../../config/firebase'
 import { IntroductionResponse } from '../../types/Types'
 import Loading from '../loading/Loading'
@@ -9,21 +10,20 @@ const Introduction = () => {
   const [introduction, setIntroduction] = useState({} as IntroductionResponse)
   const [loading, setLoading] = useState(true)
 
-  const getIntroduction = () => {
-    db.collection('introduction')
-      .limit(1)
-      .onSnapshot(
-        (introductionSnapshot) => {
-          if (!introductionSnapshot.empty) {
-            const queryIntroduction = introductionSnapshot.docs[0].data()
-            setIntroduction({ ...queryIntroduction })
-            setLoading(false)
-          }
-        },
-        (error) => {
-          console.error(error)
-        }
-      )
+  const getIntroduction = async () => {
+    try {
+      const q = query(collection(db, 'introduction'), limit(1))
+      const querySnapshot = await getDocs(q)
+
+      if (!querySnapshot.empty) {
+        const doc = querySnapshot.docs[0]
+        setIntroduction({ ...doc.data(), id: doc.id })
+      }
+    } catch (error) {
+      console.log('🚀 ~ getIntroduction ~ error:', error)
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {

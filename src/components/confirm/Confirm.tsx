@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 import './Confirm.scss'
 import { DBContext } from '../../App'
 import {
@@ -28,28 +29,23 @@ const Confirm = () => {
   const db = useContext(DBContext)
 
   const getConfirmResponse = async () => {
-    const confirmRef = db.collection('confirm')
-    const activeRef = await confirmRef.get()
+    const querySnapshot = await getDocs(collection(db, 'confirm'))
     const queryConfirm: ConfirmResponse[] = []
 
-    for (const confirm of activeRef.docs) {
-      const personRef = await confirmRef
-        .doc(confirm.id)
-        .collection('family')
-        .get()
-      const queryFamily: Person[] = []
+    for (const confirmDoc of querySnapshot.docs) {
+      const confirmData = confirmDoc.data() as ConfirmResponse
+      confirmData.id = confirmDoc.id
 
-      for (const person of personRef.docs) {
-        queryFamily.push({
-          id: person.id,
-          ...person.data(),
-        })
-      }
+      const familyRef = collection(db, `confirm/${confirmDoc.id}/family`)
+      const familySnapshot = await getDocs(familyRef)
+      const familyMembers: Person[] = familySnapshot.docs.map((personDoc) => ({
+        id: personDoc.id,
+        ...personDoc.data(),
+      }))
 
       queryConfirm.push({
-        id: confirm.id,
-        family: queryFamily,
-        ...confirm.data(),
+        ...confirmData,
+        family: familyMembers,
       })
     }
 
@@ -128,15 +124,11 @@ const Confirm = () => {
     for (const key in confirmedMembersOfFamily) {
       const guest = confirmedMembersOfFamily[key]
       const wantsAccommodation = guest.wantsAccommodation || false
-      await db
-        .collection('confirm')
-        .doc(guest.idFamily)
-        .collection('family')
-        .doc(key)
-        .update({
-          confirm: guest.confirm,
-          wantsAccommodation: guest.confirm && wantsAccommodation,
-        })
+
+      await updateDoc(doc(db, 'confirm', guest.idFamily, 'family', key), {
+        confirm: guest.confirm,
+        wantsAccommodation: guest.confirm && wantsAccommodation,
+      })
     }
     getConfirmResponse()
     setShowResult(true)
